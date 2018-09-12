@@ -1,0 +1,149 @@
+html,
+body {
+  background: url('../img/body-bg.png') repeat $dark-grey;
+  margin: 0;
+  color: white;
+  &:before {
+    content: "";
+    height: 200px;
+    width: 100%;
+    top: 0;
+    display: block;
+    position: absolute;
+    z-index: 0;
+    //GEN
+    //background: #000000; /* Old browsers */
+    //background: -moz-linear-gradient(top, #000000 0%, #171717 52%, #171717 52%, #171717 100%); /* FF3.6-15 */
+    //background: -webkit-linear-gradient(top, #000000 0%,#171717 52%,#171717 52%,#171717 100%); /* Chrome10-25,Safari5.1-6 */
+    //background: linear-gradient(to bottom, #000000 0%,#171717 52%,#171717 52%,#171717 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#171717',GradientType=0 ); /* IE6-9 */
+
+  }
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 960px;
+  width: 100%;
+  padding: 0;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h5 {
+    margin: 0;
+    font-weight: normal;
+    font-family: $haHead;
+    &:before {
+      display: none;
+    }
+  }
+  i {
+    font-family: FontAwesome !important;
+  }
+}
+
+.content {
+  box-sizing: border-box;
+  h2 {
+    text-transform: uppercase;
+    font-family: $altHead;
+  }
+  h3 {
+    //font-family: $altHead;
+    color: $green;
+  }
+}
+
+.padded {
+  &-sm {
+    padding: $space-sm;
+  }
+  &-md {
+    padding: $space-md;
+  }
+  &-lg {
+    padding: $space-lg;
+  }
+}
+
+.padded-topBottom {
+  &-sm {
+    padding: $space-sm 0;
+  }
+  &-md {
+    padding: $space-md 0;
+  }
+  &-lg {
+    padding: $space-lg 0;
+  }
+}
+
+.padded-leftRight {
+  &-sm {
+    padding: 0 $space-sm;
+  }
+  &-md {
+    padding: 0 $space-md;
+  }
+  &-lg {
+    padding: 0 $space-lg;
+  }
+}
+
+.nopad-left {
+  padding-left: 0;
+}
+
+.centered {
+  text-align: center;
+}
+
+.hyprGreen {
+  color: $green;
+}
+
+.container{
+  margin: 0 auto;
+  max-width: 960px;
+  width: 95%;
+  @media all and (min-width: 600px) {
+    width: 85%;
+    max-width: 1372px;
+  }
+  padding: 0;
+  img{
+    max-width:100%;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h5 {
+    margin: 0;
+    font-weight: normal;
+    font-family: $haHead;
+    &:before {
+      display: none;
+    }
+  }
+  i {
+    font-family: FontAwesome !important;
+  }
+}
+
+//Common media queries, with color test
+//body{
+//  border-top:40px solid red;
+//  @media all and (min-width:$screen-sm) {
+//    border-color:blue;
+//  }
+//  @media all and (min-width:$screen-md) {
+//    border-color:purple;
+//  }
+//  @media all and (min-width:$screen-lg) {
+//    border-color:yellow;
+//  }
+//}

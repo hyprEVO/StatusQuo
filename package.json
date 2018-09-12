@@ -1,0 +1,36 @@
+{
+  "name": "hypralerts",
+  "version": "0.1.0",
+  "description": "A static blog to share hypr updates with internal team",
+  "main": "src/index.html",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "handlebars": "^4.0.11"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-deploy-ftp": "^1.0.0",
+    "gulp-directory-sync": "^1.2.3",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.1.0",
+    "gulp-wait": "0.0.2",
+    "run-sequence": "^1.2.2",
+    "vinyl-ftp": "^0.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/LPII/hypralerts.git"
+  },
+  "author": "Lance Porter",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/LPII/hypralerts#readme"
+}

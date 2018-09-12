@@ -1,0 +1,145 @@
+<script type="text/x-handlebars-template" id="js-newsLink-template">
+    {{#each this}}
+
+    <a href="{{this.link.href}}" class="main__contentBlock-newsLink main__contentBlock-newsLink-node js-contentBlock-news" title=" {{this.title}}"
+       target="_blank" data-bgImg="">
+        <div class="main__contentBlock-contentWrap">
+            <div class="main__contentBlock-heading">
+                <i class="fa fa-rss" aria-hidden="true"></i> News
+            </div>
+            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
+                {{this.title}}
+            </div>
+        </div>
+        <img src="{{extractURL this.summary.content}}" alt="">
+    </a>
+
+    {{/each}}
+</script>
+<script type="text/x-handlebars-template" id="js-MVnewsLink-template">
+    {{#each this}}
+
+    <a href="{{this.link.href}}" class="main__contentBlock-newsLink main__contentBlock-newsLink-node js-contentBlock-news" title=" {{this.title}}"
+       target="_blank" data-bgImg="">
+        <div class="main__contentBlock-contentWrap">
+            <div class="main__contentBlock-heading">
+                <i class="fa fa-rss" aria-hidden="true"></i> MarzVindicator
+            </div>
+            <div class="main__contentBlock-subhead main__contentBlock-subhead--news main__contentBlock-subhead--news-feat">
+                {{this.title}}
+            </div>
+        </div>
+        <img src="{{extractURL this.summary.content}}" alt="">
+    </a>
+
+    {{/each}}
+</script>
+<script type="text/x-handlebars-template" id="js-SSnewsLink-template">
+    {{#each this}}
+
+    <a href="{{this.link.href}}" class="main__contentBlock-newsLink main__contentBlock-newsLink-node js-contentBlock-news" title=" {{this.title}}"
+       target="_blank" data-bgImg="">
+        <div class="main__contentBlock-contentWrap">
+            <div class="main__contentBlock-heading">
+                <i class="fa fa-rss" aria-hidden="true"></i> Sega Sense
+            </div>
+            <div class="main__contentBlock-subhead main__contentBlock-subhead--news main__contentBlock-subhead--news-feat">
+                {{this.title}}
+            </div>
+        </div>
+        <img src="{{extractURL this.summary.content}}" alt="">
+    </a>
+
+    {{/each}}
+</script>
+<script type="text/x-handlebars-template" id="js-feat-template">
+
+    <a href="{{url}}" class="main__contentBlock-content main__contentBlock-content--feat js-feat-desk"
+       title="{{title}} #hyprEVO"
+       target="_blank" style="background-image:url({{imgPath}}); ">
+
+        <div class="main__contentBlock-heading">
+            <i class="fa fa-{{icon}}" aria-hidden="true"></i> Featured Content: {{contentType}}
+        </div>
+        <div class="main__contentBlock-subhead">
+            {{title}}
+        </div>
+        <div class="main__contentBlock-descrip">
+            {{desc}}
+        </div>
+
+    </a>
+
+</script>
+<script type="text/x-handlebars-template" id="js-feat-template-mob">
+
+    <div style="display:block"><a href="{{url}}"
+                                  class="main__contentBlock-content main__contentBlock-content--feat js-feat-mob"
+                                  title="{{title}} #hyprEVO"
+                                  target="_blank" style="background-image:url({{imgPath}}); ">
+
+        <div class="main__contentBlock-heading">
+            <i class="fa fa-{{icon}}" aria-hidden="true"></i> Featured Content: {{contentType}}
+        </div>
+        <div class="main__contentBlock-subhead">
+            {{title}}
+        </div>
+        <div class="main__contentBlock-descrip">
+            {{desc}}
+        </div>
+
+    </a></div>
+
+</script>
+<script type="text/x-handlebars-template" id="js-mvLink-template">
+    {{#each this}}
+
+    <a href="{{this.link.href}}" class="main__contentBlock-newsLink js-contentBlock-news" title=" {{this.title}}"
+       target="_blank" data-bgImg="">
+        <div class="main__contentBlock-contentWrap">
+            <div class="main__contentBlock-heading">
+                <i class="fa fa-rss" aria-hidden="true"></i>
+            </div>
+            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
+                {{this.title}}
+            </div>
+        </div>
+        <img src="{{extractURL this.summary.content}}" alt="">
+    </a>
+
+    {{/each}}
+</script>
+<script type="text/x-handlebars-template" id="js-vidListQC-template">
+    {{#each this}}
+
+    <a href="{{this.link.href}}" class="" title="[Youtube] - {{this.group.description}}"
+       target="_blank" data-bgImg="">
+        <div class="main__contentBlock-contentWrap">
+            <div class="main__contentBlock-heading">
+                <!--<i class="fa fa-rss" aria-hidden="true"></i>-->
+            </div>
+            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
+                <i class="fa  fa-youtube-play padded-leftRight-sm nopad-left hyprGreen" aria-hidden="true"></i>  {{this.title}}
+            </div>
+        </div>
+    </a>
+
+    {{/each}}
+</script>
+<script type="text/x-handlebars-template" id="js-vidListMV-template">
+    {{#each this}}
+
+    <a href="{{this.link.href}}" class="" title="[Youtube] - {{this.group.description}}"
+       target="_blank" data-bgImg="">
+        <div class="main__contentBlock-contentWrap">
+            <div class="main__contentBlock-heading">
+                <!---->
+            </div>
+            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
+                <i class="fa  fa-youtube-play padded-leftRight-sm nopad-left hyprGreen" aria-hidden="true"></i>  {{this.title}}
+            </div>
+        </div>
+    </a>
+
+    {{/each}}
+</script>

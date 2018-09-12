@@ -1,0 +1,64 @@
+//Clearfix Helper
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+//border img 
+//black, rgba(0, 0, 0, 0)
+//@include border-image(color,color)
+@mixin border-image($args...) {
+  -webkit-border-image: -webkit-linear-gradient(args) 1 100%;
+  -moz-border-image: -moz-linear-gradient($args) 1 100%;
+  -o-border-image: -o-linear-gradient($args) 1 100%;
+  border-image: linear-gradient(to bottom, $args) 1 100%;
+}
+
+//  @include rotate(-45deg);
+@mixin rotate($degrees) {
+  -webkit-transform: rotate($degrees);
+  -moz-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+
+//	@include transition(all 250ms ease-in-out);
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+//@include radius(3px);
+@mixin radius($args...) {
+  -webkit-border-radius: $args;
+  -moz-border-radius: $args;
+  border-radius: $args;
+}
+
+//  @include column-count(2);
+@mixin column-count($args...) {
+  -webkit-column-count: $args;
+  /* Chrome, Safari, Opera */
+  -moz-column-count: $args;
+  /* Firefox */
+  column-count: $args;
+}
+
+//  @include column-gap(10px);
+@mixin column-gap($args...) {
+  -webkit-column-gap: $args;
+  /* Chrome, Safari, Opera */
+  -moz-column-gap: $args;
+  /* Firefox */
+  column-gap: $args;
+}

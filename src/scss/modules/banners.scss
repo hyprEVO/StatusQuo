@@ -1,0 +1,31 @@
+.banner-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom:$space-md;
+  @media all and(min-width: $screen-md) {
+    flex-direction: row;
+    margin-bottom:0;
+  }
+  &__banner {
+    img {
+      width: 100%;
+    }
+    &:first-child {
+      margin:0;
+margin-bottom:$space-md;
+      @media all and(min-width: $screen-md) {
+        padding: 0;
+        margin-right: $space-sm;
+      }
+
+    }
+    &:last-child {
+
+      margin: 0;
+      @media all and(min-width: $screen-md) {
+        margin-left: $space-sm;
+        padding:0;
+      }
+    }
+  }
+}
