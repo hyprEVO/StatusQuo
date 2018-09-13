@@ -23,10 +23,10 @@ var localFilesGlob = ['./build/**'];
 
 
 //PROJECTS//
-var localDir = "http://localhost/hyprEVO/";
+var localDir = "http://localhost/SQ/";
 var srcDir = "./src/";
 var buildDir = "./build/";
-var altDir = "C:/xampp/htdocs/hyprEVO/";
+var altDir = "C:/xampp/htdocs/SQ/";
 
 
 // -- UTIL -- //
