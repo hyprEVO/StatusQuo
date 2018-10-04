@@ -1,6 +1,6 @@
 html,
 body {
-  background: url('../img/body-bg.png') repeat $dark-grey;
+  background-color: #0d0d0d;
   margin: 0;
   color: white;
   &:before {
@@ -104,7 +104,7 @@ body {
   color: $green;
 }
 
-.container{
+.container {
   margin: 0 auto;
   max-width: 960px;
   width: 95%;
@@ -113,8 +113,8 @@ body {
     max-width: 1372px;
   }
   padding: 0;
-  img{
-    max-width:100%;
+  img {
+    max-width: 100%;
   }
   h1,
   h2,

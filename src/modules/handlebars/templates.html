@@ -148,7 +148,6 @@
 
     {{/each}}
 </script>
-
 <script type="text/x-handlebars-template" id="js-testData-template">
 
 
@@ -163,8 +162,28 @@
 
         </audio>
         <br>
-        <hr>
+
     </div>
     {{/each}}
 
+</script>
+<script type="text/x-handlebars-template" id="js-oldEp-template">
+
+
+    {{#each this}}
+
+    <div>
+
+        <h3>{{this.title}}</h3>
+        <a href="">Listen now</a>
+        <br>
+
+    </div>
+    {{/each}}
+
+</script>
+<script type="text/x-handlebars-template" id="js-subTitle-template">
+    {{#each this}}
+    <p>{{this.subTitle}}</p>
+    {{/each}}
 </script>

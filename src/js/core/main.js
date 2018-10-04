@@ -12,16 +12,8 @@
 
 //------------------METHODS------------------//
 
-//Featured Post Object
-var featData = {
-    contentType: "Podcast",
-    title: "Status Quo #17",
-    desc: " In this 17th episode, Marz and Queasy discuss the current state of Capcom, games with development issues, racing games past and present, and Marz Vindicator details his recent epiphany in regard to game collecting.",
-    url: 'https://soundcloud.com/hypr-evo/status-quo-17-whats-wrong-with-capcom-games-with-issues-racing-games-mvs-manifesto',
-    imgPath: "img/featImg-SQ.jpg",
-    icon: "soundcloud"
-};
-
+var globalData = {};
+globalData.state = 'closed';
 //Helper function to extract img path from rss content
 Handlebars.registerHelper('extractURL', function (url) {
     var tmp = document.createElement('div');
@@ -70,105 +62,75 @@ function injectScript(url) {
 
 //-- RSS RESPONSE METHODS --
 //Methods used by inject script on how to handle the JSON response, includes key for different response
-
-//MV Featured
-function handleResponseMVfeat(response) {
-    //Throwing MarzV feed into the featured slots for now
-    var cleanData = response.query.results.feed.entry.slice(0, 3);
-    // doHandlebars(cleanData, "#js-MVnewsLink-template", "#js-newsLink-wrap", "html");
-    return response;
-}
-
-//News feed
-function handleResponseNews(response) {
-    var cleanData = response.query.results.feed.entry.slice(0, 4);
-    doHandlebars(cleanData, "#js-newsLink-template", ".js-news-wrap", "html");
-}
-
-//SegaSense Feed (scrubbed)
-function handleResponseSS(response) {
-    // http://segasense.blogspot.com/
-    var rawData = response.query.results.feed.entry;
-    var cleanData = response.query.results.feed.entry.slice(0, 3);
-    doHandlebars(cleanData, "#js-SSnewsLink-template", "#js-newsLink-wrap", "html");
-    console.log(rawData);
-}
-
-//QC Youtube Feed
-function handleResponseQCyt(response) {
-    var cleanData = response.query.results.feed.entry;
-    doHandlebars(cleanData.slice(0, 5), "#js-vidListQC-template", ".js-vidQC-wrap", "append");
-
-}
-
-//MV Youtube Feed
-function handleResponseMVyt(response) {
-    var cleanData = response.query.results.feed.entry;
-    doHandlebars(cleanData.slice(0, 5), "#js-vidListMV-template", ".js-vidMV-wrap", "append");
-}
-
-
 //SQ RSS Feed
 function handleResponseSQfeed(response) {
     var cleanData = response.query.results.feed.entry;
-    doHandlebars(cleanData.slice(0, 1), "#js-testData-template", ".js-testDataFeat-wrap", "append");
-    doHandlebars(cleanData.slice(1, 100), "#js-testData-template", ".js-testData-wrap", "append");
-    console.log("SQ feed", cleanData);
+    var subTitle = response.query.results.feed.subtitle["0"];
+    var contentObj = [{subTitle: subTitle}];
+
+    //make global data relevent
+    globalData.response = response.query.results.feed.entry;
+
+
+    doHandlebars(globalData.response.slice(0, 1), "#js-testData-template", ".js-testDataFeat-wrap", "append");
+    doHandlebars(globalData.response.slice(1, 7), "#js-oldEp-template", ".js-testData-wrap", "append");
+    doHandlebars(contentObj, "#js-subTitle-template", ".js-subTitle-wrap", "html");
+    console.log('cleandata', cleanData);
+    console.log('contentObj', contentObj);
+}
+function updateButtonText() {
+    if (globalData.state === 'open') {
+        $('.js-load-btn').html('Hide Epidsodes');
+        return
+    }
+    $('.js-load-btn').html('Show More Epidsodes');
+}
+function loadMoreSQ() {
+    var cleanData = globalData.response;
+    if (globalData.state === 'closed') {
+        doHandlebars(cleanData.slice(7, 100), "#js-oldEp-template", ".js-testData-wrap", "append");
+        toggleState();
+        updateButtonText();
+    } else {
+        doHandlebars(cleanData.slice(1, 7), "#js-oldEp-template", ".js-testData-wrap", "html");
+        toggleState();
+        updateButtonText();
+    }
 }
 
+function toggleState() {
+    if (globalData.state === 'open') {
+        globalData.state = 'closed';
+    } else {
+        globalData.state = 'open'
+    }
 
-//Use github api to get latest tag dynamically
-function latestTag() {
-    var gitHubPath = 'hyprevo/hyprevo.com';
-    var url = 'https://api.github.com/repos/' + gitHubPath + '/tags';
-
-    $.get(url).done(function (data) {
-        var versions = data.sort(function (v1, v2) {
-            return semver.compare(v2.name, v1.name)
-        });
-        $('.tag-result').html(versions[0].name);
-    });
+    console.log('state', globalData.state);
 }
 
 
 //------------------DOC READY------------------//
 $(document).ready(function () {
+// Select all links with hashes
+    $("a[href^='#']").click(function(e) {
+        e.preventDefault();
 
-    latestTag();
-    // loadFeed("http://segasense.blogspot.com/feeds/posts/default?alt=rss", "SS");
-    // loadFeed("http://www.gameinformer.com/b/mainfeed.aspx?Tags=news", "News");
-    // loadFeed("http://www.marzvindicator.com/feeds/posts/default?alt=rss", "MVfeat");
-    // loadFeed("https://www.youtube.com/feeds/videos.xml?channel_id=UCNj11HAYuO0LaCKKGSGPL8g", "QCyt");
-    // loadFeed("https://www.youtube.com/feeds/videos.xml?channel_id=UCQkZLuIepmT7wCFGhE_1E_A", "MVyt");
+        var position = $($(this).attr("href")).offset().top;
+
+        $("body, html").animate({
+            scrollTop: position
+        } /* speed */ );
+    });
     loadFeed("https://www.spreaker.com/show/3133182/episodes/feed", "SQfeed");
 
+    $('.js-load-btn').on('click', function () {
+        loadMoreSQ();
+    });
+    console.log('gd', globalData);
     //New error handling
     // setTimeout(function () {
     //     if ($('.js-news-wrap a').length < 1) {
     //         $('.js-news-wrap .main__contentBlock-subhead ').html("Error loading feed, please reload page.")
     //     }
     // }, 2000);
-
-    //Render feat post
-    if (window.matchMedia("(min-width: 1668px)").matches) {
-        doHandlebars(featData, "#js-feat-template", ".js-feat-wrap", "prepend");
-    } else {
-        doHandlebars(featData, "#js-feat-template-mob", ".js-feat-wrap", "prepend");
-    }
-    //Fix for ipad rendering, renders feat post depending on size
-    $(window).on('resize', function () {
-        if (window.matchMedia("(min-width: 1668px)").matches) {
-            $('.main__contentBlock-content--feat').remove();
-            if ($(".js-feat-desk").length < 1) {
-                doHandlebars(featData, "#js-feat-template", ".js-feat-wrap", "prepend");
-            }
-        } else {
-            $('.main__contentBlock-content--feat').remove();
-            doHandlebars(featData, "#js-feat-template-mob", ".js-feat-wrap", "prepend");
-            if ($(".js-feat-mob").length < 1) {
-                doHandlebars(featData, "#js-feat-template-mob", ".js-feat-wrap", "append");
-            }
-        }
-    });
-
 });
