@@ -76,7 +76,7 @@
         margin: 0 0 0 $space-md;
       }
       a {
-        color: $white;
+        color: $inactiveGrey;
         i {
           padding-top: $space-sm;
           font-size: 20px;
@@ -187,6 +187,10 @@
     line-height: 2rem;
     font-size: 1.3rem;
     padding-bottom: $space-md;
+    @media all and(max-width:$screen-sm) {
+      font-size:1rem;
+      line-height:1.7rem;
+    }
   }
 
   &__bottom {
@@ -306,29 +310,37 @@
     }
   ;
   }
-
 }
 
-.loadButton{
+.loadButton {
   background: #000000;
-  float:left;
-  color:$inactiveGrey;
+  float: left;
+  color: $inactiveGrey;
   padding: $space-md;
   font-family: $sqBodyFont;
-  clear:both;
-  cursor:pointer;
-  i{
-    color:white;
-    padding-right:$space-sm;
+  clear: both;
+  box-sizing: border-box;
+  cursor: pointer;
+  i {
+    color: white;
+    padding-right: $space-sm;
   }
-  &:hover{
-    color:white;
+  &:hover {
+    color: white;
+  }
+  @media all and(max-width: $screen-md) {
+    float: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+
+  }
+  @media all and(max-width: $screen-sm) {
+    font-size: 13px;
+    padding: $space-sm;
+
   }
 }
-
-
-
-
 
 .SD-heading {
   padding-left: 15px;

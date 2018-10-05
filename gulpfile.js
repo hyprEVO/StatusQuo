@@ -98,12 +98,13 @@ gulp.task('make-image', function () {
 
 //Build everything make-rest --> build
 gulp.task('make-rest', function () {
+    var ignoreList = ['html', 'modules', 'img', 'scss', 'css', 'js', 'js/**', 'partials', 'notes'];
     return gulp.src('')
         .pipe(dirSync(srcDir, buildDir, {
-            ignore: ['html', 'modules', 'img', 'scss', 'css', 'js', 'js/**']
+            ignore: ignoreList
         }))
         .pipe(dirSync(srcDir, altDir, {
-            ignore: ['html', 'modules', 'img', 'scss', 'css', 'js', 'js/**']
+            ignore: ignoreList
         }));
 });
 
@@ -138,10 +139,10 @@ gulp.task('construct-all', function () {
 
 gulp.task('watch', function () {
     //Source
-    gulp.watch(['./src/*.html', './src/modules/*.html','./src/modules/stasis/*.html', './src/*.html'], ['make-html', 'make-rest', 'reload']);
+    gulp.watch(['./src/*.html', './src/modules/*.html', './src/modules/stasis/*.html', './src/*.html'], ['make-html', 'make-rest', 'reload']);
     gulp.watch(['./src/*.php'], ['make-html', 'make-rest', 'reload']);
     gulp.watch(['./src/scss/*.scss', './src/scss/*/*.scss'], ['make-html', 'make-styles', 'reload']);
-    gulp.watch(['./src/js/**/*.js'], ['make-html', 'make-js', 'reload']);
+    gulp.watch(['./src/js/**/*.js'], ['make-html', 'make-rest', 'reload']);
     gulp.watch(['./src/img/**'], ['make-rest', 'reload']);
 });
 
@@ -150,3 +151,4 @@ gulp.task('watch', function () {
 
 gulp.task('local', ['clean', 'construct', 'sync', 'watch']);
 gulp.task('serve', ['sync', 'watch']);
+gulp.task('makeBuild', ['clean', 'construct-all']);

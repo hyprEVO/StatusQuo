@@ -31,10 +31,10 @@
     text-align: center;
     color: $inactiveGrey;
     font-size: .8rem;
-    display:block;
-    float:left;
+    display: block;
+    float: left;
     font-family: $haBody;
-    padding:$space-xs $space-sm;
+    padding: $space-xs $space-sm;
     a {
       color: $green;
       text-decoration: none;
@@ -57,47 +57,101 @@
     float: right;
     ul {
       margin: 0;
-      padding:$space-xs 0 $space-xs  $space-xs;
+      padding: $space-xs 0 $space-xs $space-xs;
       li {
         list-style: none;
         display: inline;
         margin-right: $space-xs;
         font-family: $sqBodyFont;
-        font-size:13px;
+        font-size: 13px;
         a {
           text-decoration: none;
           color: $inactiveGrey;
-          &:hover{
-            color:white;
+          &:hover {
+            color: white;
           }
         }
-        &:last-child{
-          margin:0;
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+  @media all and(max-width: 900px) {
+    &__logo {
+      @include transition(all 350ms ease-in-out);
+      @include clearfix();
+
+      float: none;
+      margin: 0 auto;
+      max-width: 25px;
+      img {
+        width: 100%;
+        display: block;
+        @include clearfix();
+      }
+    }
+    &__copyright {
+      text-align: center;
+      color: $inactiveGrey;
+      font-size: .8rem;
+      display: block;
+      float: none;
+      font-family: $haBody;
+      padding: $space-md;
+      a {
+        color: $green;
+        text-decoration: none;
+      }
+    }
+    &__links {
+      float: none;
+      ul {
+        margin: 0;
+        padding: $space-xs 0 $space-xs $space-xs;
+        width: 100%;
+        text-align: center;
+        li {
+          list-style: none;
+          display: inline-block;
+          margin-right: $space-xs;
+          font-family: $sqBodyFont;
+          font-size: 13px;
+          a {
+            text-decoration: none;
+            color: $inactiveGrey;
+            &:hover {
+              color: white;
+            }
+          }
+          &:last-child {
+            margin: 0;
+          }
         }
       }
     }
   }
 }
 
-.backToTop{
+.backToTop {
 
-  @media all and(max-width: $screen-md) {
-    padding: $space-md $space-md;
-  }
   background: #000000;
   padding: $space-sm;
-  max-width:50px;
-  cursor:pointer;
+  max-width: 50px;
+  cursor: pointer;
   font-family: $sqBodyFont;
-  font-size:13px;
-  color:$inactiveGrey;
-  text-align:center;
-  position:fixed;
-  right:0;
-  top:150px;
-  i{
-    width:100%;
-    text-align:center;
+  font-size: 13px;
+  color: $inactiveGrey;
+  text-align: center;
+  position: fixed;
+  right: 0;
+  bottom: 10px;
+  i {
+    width: 100%;
+    text-align: center;
   }
-  
+  @media all and (max-width: $space-md) {
+    padding: 15px;
+  }
+
 }
