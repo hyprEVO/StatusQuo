@@ -1,5 +1,5 @@
-.heading{
-  padding:$space-lg 0 $space-lg 0 ;
+.heading {
+  padding: $space-lg 0 $space-lg 0;
   &__logo {
     @include transition(all 350ms ease-in-out);
     padding: $space-md;
@@ -7,19 +7,19 @@
     z-index: 1;
     &-img {
       max-width: 370px;
-      width:100%;
+      width: 100%;
       display: block;
       margin-left: -45px;
     }
   }
-  &__description{
-    font-family:$sqHeadingFont;
-    font-size:1.5rem;
-    text-align:left;
-    width:50%;
+  &__description {
+    font-family: $sqHeadingFont;
+    font-size: 1.5rem;
+    text-align: left;
+    width: 50%;
     position: relative;
-    padding:0 $space-lg;
-    &:before{
+    padding: 0 $space-lg;
+    &:before {
       content: "";
       height: 5px;
       width: 40px;
@@ -30,4 +30,308 @@
       position: absolute;
     }
   }
+}
+
+.header {
+  //background:red;
+  padding: $space-md $space-xl;
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  @include clearfix();
+
+  &__logo-wrap {
+    float: left;
+    width: 100%;
+    max-width: 235px;
+    img {
+
+    }
+    @media all and(max-width: $screen-md) {
+      max-width: 100%;
+      width: 235px;
+      float: none;
+      margin: 0 auto;
+      display: block;
+      img {
+        margin: 0 auto;
+        display: block;
+
+      }
+    }
+  }
+
+  &__social {
+    width: 100%;
+    display: block;
+    text-align: right;
+    margin: 0 auto $space-sm auto;
+    max-width: 365px;
+    padding: 0;
+    @include radius(6px);
+    li {
+      display: inline-block;
+      margin: 0 $space-sm $space-sm 0;
+      @media all and(min-width: $screen-sm) {
+        margin: 0 0 0 $space-md;
+      }
+      a {
+        color: $white;
+        i {
+          padding-top: $space-sm;
+          font-size: 20px;
+        }
+        &:hover {
+          color: white;
+        }
+      }
+    }
+    @media all and(max-width: $screen-md) {
+      width: 100%;
+      float: none;
+      margin: 0 auto;
+      text-align: center;
+      li {
+        margin: 0 $space-sm;
+        a {
+
+        }
+      }
+
+    }
+    &-wrap {
+      float: right;
+      //background: blue;
+      @media all and(max-width: $screen-md) {
+        float: none;
+      }
+    }
+
+  }
+}
+
+.bodyText {
+  padding: $space-md $space-xl;
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  @include clearfix();
+  font-size: 22px;
+  font-family: $sqHeadingFont;
+  p {
+    position: relative;
+    max-width: 940px;
+    &:before {
+      content: "";
+      height: 5px;
+      width: 40px;
+      background: $sq-red;
+      display: block;
+
+      top: -25px;
+      left: 0;
+      position: absolute;
+    }
+  }
+}
+
+.sectionHeader {
+  padding: $space-md $space-xl;
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  font-family: $sqBodyFont;
+  color: $inactiveGrey;
+  text-transform: uppercase;
+}
+
+.featEpisode {
+  padding: $space-md $space-xl;
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  &__wrap {
+    background: black;
+    padding: $space-md;
+  }
+
+  &__title {
+    color: white;
+    font-family: $sqBodyFont;
+    font-weight: 700;
+    font-size: 25px;
+    padding-bottom: $space-md;
+    display: block;
+
+  }
+  &__playBar {
+    background: $dark-grey;
+    padding: $space-sm;
+    @include clearfix();
+  }
+  &__playButton {
+    color: $sq-red;
+    float: left;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  &__time {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    float: right;
+  }
+  &__description {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    padding-top: $space-md;
+    line-height: 2rem;
+    font-size: 1.3rem;
+    padding-bottom: $space-md;
+  }
+
+  &__bottom {
+  }
+  &__download {
+    display: inline-block;
+    padding: $space-xs 0;
+    cursor: pointer;
+    color: $inactiveGrey;
+    font-family: $sqBodyFont;
+    i {
+      padding-right: $space-xs;
+    }
+    &:hover {
+      color: white;
+    }
+  ;
+  }
+
+}
+
+.singleEpisode {
+  margin: 10px;
+  flex-basis: calc(25% - 20px);
+  @media (max-width: $screen-xl) {
+    flex-basis: calc(33.333% - 20px);
+  }
+  @media (max-width: 1220px) {
+    flex-basis: calc(50% - 20px);
+  }
+  @media (max-width: $screen-md) {
+    flex-basis: 100%;
+  }
+  &__flexContain {
+    overflow: hidden;
+  }
+  &__wrap {
+
+    background: #000000;
+    padding: $space-md;
+  }
+  &__contain {
+    padding: $space-md $space-xl;
+    @media all and(max-width: $screen-md) {
+      padding: $space-md $space-md;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    @media (min-width: 600px) {
+      margin: -10px;
+    }
+  }
+  &__title {
+    color: white;
+    font-family: $sqBodyFont;
+    font-weight: 700;
+    font-size: 18px;
+    padding-bottom: $space-md;
+    display: block;
+    text-transform: uppercase;
+
+  }
+  &__playBar {
+    background: $dark-grey;
+    padding: $space-sm;
+    @include clearfix();
+  }
+  &__playButton {
+    color: $sq-red;
+    float: right;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  &__time {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    float: left;
+    padding: 6px $space-sm $space-xs 0;
+    margin-right: $space-sm;
+    border-right: 1px solid #2b2b2b;
+    @media (max-width: 1220px) {
+      display: none;
+    }
+  }
+  &__description {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    margin-bottom: $space-md;
+    line-height: 1.5rem;
+    font-size: 14px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+  &__bottom {
+  }
+  &__download {
+    display: inline-block;
+    padding: $space-xs 0;
+    cursor: pointer;
+    color: $inactiveGrey;
+    font-family: $sqBodyFont;
+    font-size: 14px;
+    @media (max-width: 1220px) {
+      width: 100%;
+      border: none;
+      text-align: center;
+      background: #171717;
+    }
+    i {
+      padding-right: $space-xs;
+    }
+    &:hover {
+      color: white;
+    }
+  ;
+  }
+
+}
+
+.loadButton{
+  background: #000000;
+  float:left;
+  color:$inactiveGrey;
+  padding: $space-md;
+  font-family: $sqBodyFont;
+  clear:both;
+  cursor:pointer;
+  i{
+    color:white;
+    padding-right:$space-sm;
+  }
+  &:hover{
+    color:white;
+  }
+}
+
+
+
+
+
+.SD-heading {
+  padding-left: 15px;
+  font-family: $haHead;
+  border-bottom: 1px solid #1f1f1f;
 }

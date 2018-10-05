@@ -1,17 +1,19 @@
 .footer {
-  margin-top:$space-lg;
+  padding: $space-md;
+  @include clearfix();
+  background: #000000;
   &__social {
     width: 100%;
     display: block;
     text-align: center;
-    margin:0 auto $space-sm auto;
+    margin: 0 auto $space-sm auto;
     max-width: 365px;
     padding: 0;
     @include radius(6px);
     li {
       display: inline-block;
       margin: 0 $space-sm $space-sm 0;
-      @media all and(min-width:$screen-sm) {
+      @media all and(min-width: $screen-sm) {
         margin: 0 $space-sm;
       }
       a {
@@ -27,24 +29,75 @@
   }
   &__copyright {
     text-align: center;
-    color: $light-grey;
-    font-size:.8rem;
-    font-family:$haBody;
-    padding:0 $space-sm;
-    margin-bottom: $space-md;
-    a{
-      color:$green;
-      text-decoration:none;
+    color: $inactiveGrey;
+    font-size: .8rem;
+    display:block;
+    float:left;
+    font-family: $haBody;
+    padding:$space-xs $space-sm;
+    a {
+      color: $green;
+      text-decoration: none;
     }
   }
   &__logo {
     @include transition(all 350ms ease-in-out);
-    padding: 0 $space-sm;
-    margin-bottom:$space-lg;
-    &-img {
-      max-width: $space-sm;
-      margin: 0 auto;
+    @include clearfix();
+    display: block;
+    float: left;
+    margin: 0 $space-sm 0 0;
+    max-width: 25px;
+    img {
+      width: 100%;
       display: block;
+      @include clearfix();
     }
   }
+  &__links {
+    float: right;
+    ul {
+      margin: 0;
+      padding:$space-xs 0 $space-xs  $space-xs;
+      li {
+        list-style: none;
+        display: inline;
+        margin-right: $space-xs;
+        font-family: $sqBodyFont;
+        font-size:13px;
+        a {
+          text-decoration: none;
+          color: $inactiveGrey;
+          &:hover{
+            color:white;
+          }
+        }
+        &:last-child{
+          margin:0;
+        }
+      }
+    }
+  }
+}
+
+.backToTop{
+
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  background: #000000;
+  padding: $space-sm;
+  max-width:50px;
+  cursor:pointer;
+  font-family: $sqBodyFont;
+  font-size:13px;
+  color:$inactiveGrey;
+  text-align:center;
+  position:fixed;
+  right:0;
+  top:150px;
+  i{
+    width:100%;
+    text-align:center;
+  }
+  
 }
