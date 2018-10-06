@@ -1,6 +1,7 @@
 .singleEpisode {
   margin: 10px;
   flex-basis: calc(25% - 20px);
+
   @media (max-width: $screen-xl) {
     flex-basis: calc(33.333% - 20px);
   }
@@ -15,14 +16,13 @@
   }
   &__wrap {
 
-    background: #000000;
+    background: #101010;
     padding: $space-md;
+    border-top: 1px solid #191919;
     @include transition(all 250ms ease-in-out);
-    &:hover{
+    &:hover {
       @include transition(all 250ms ease-in-out);
-      -webkit-box-shadow: -1px -6px 0px -5px rgba(160,43,49,1);
-      -moz-box-shadow: -1px -6px 0px -5px rgba(160,43,49,1);
-      box-shadow: -1px -6px 0px -5px rgba(160,43,49,1);
+      background: #000;
     }
   }
   &__contain {
@@ -67,6 +67,7 @@
     @media (max-width: 1220px) {
       display: none;
     }
+    display: none;
   }
   &__description {
     color: $inactiveGrey;
@@ -103,19 +104,29 @@
     &:hover {
       @include transition(all 250ms ease-in-out);
       color: white;
+      i{
+        color:$sq-red;
+      }
     }
   ;
   }
-  &--state-playing{
-    .singleEpisode__description{
-      color:white;
+  &--state-playing {
+    .singleEpisode__description {
+      color: white;
       @include transition(all 250ms ease-in-out);
     }
 
-    .singleEpisode__wrap{
-      -webkit-box-shadow: inset 0px 0px 0px 1px rgba(160,43,49,1);
-      -moz-box-shadow: inset 0px 0px 0px 1px rgba(160,43,49,1);
-      box-shadow: inset 0px 0px 0px 1px rgba(160,43,49,1);
+    .singleEpisode__wrap {
+      background: #000;
+      -webkit-box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
+      -moz-box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
+      box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
     }
+  }
+  .mejs-button, .mejs-time {
+    display: none !important;
+  }
+  .mejs-container {
+    height: 12px !important;
   }
 }

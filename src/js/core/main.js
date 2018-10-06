@@ -13,7 +13,12 @@
 //------------------METHODS------------------//
 
 var globalData = {};
+var allEpisodes = $('.singleEpisode');
+var allIcons = $('.singleEpisode__playButton i.fa');
+
 globalData.state = 'closed';
+
+
 //Helper function to extract img path from rss content
 Handlebars.registerHelper('extractURL', function (url) {
     var tmp = document.createElement('div');
@@ -78,6 +83,7 @@ function handleResponseSQfeed(response) {
     console.log('cleandata', cleanData);
     console.log('contentObj', contentObj);
 }
+
 function updateButtonText() {
     if (globalData.state === 'open') {
         $('.js-load-btn').html('Hide Epidsodes');
@@ -97,7 +103,6 @@ function loadMoreSQ() {
         updateButtonText();
     }
 }
-
 function toggleState() {
     if (globalData.state === 'open') {
         globalData.state = 'closed';
@@ -107,31 +112,87 @@ function toggleState() {
 
     console.log('state', globalData.state);
 }
-
-function turnOffFeature() {
+function turnOffFeat() {
     var playBtn = $('.featEpisode .mejs-playpause-button');
-
     if (playBtn.hasClass('mejs-pause')) {
         playBtn.trigger('click');
     }
+}
+function triggerSingleAudio(instance) {
+    var parentIndex = instance.closest('.singleEpisode').index();
+    var playBtn = $('.singleEpisode').eq(parentIndex).find($(' .mejs-playpause-button'));
+
+    playBtn.click();
+
 
 }
 function turnOffSingles() {
     var allEpisodes = $('.singleEpisode');
     allEpisodes.each(function () {
-        if($(this).attr('data-state') === "on"){
+        if ($(this).attr('data-state') === "on") {
             $(this).find('.js-single-playButton').trigger('click');
         }
     });
 
 }
+function turnOffFeat(){
+
+}
+function handleOnState(instance) {
+    var thisEpisode = instance.closest('.singleEpisode');
+    var icon = instance.children('i');
+    // turnOffFeature();
+    //Reset all episodes
+
+    allEpisodes.removeClass('singleEpisode--state-playing');
+    allEpisodes.attr('data-state', 'off');
+
+    //Turn on this episode
+    thisEpisode.addClass('singleEpisode--state-playing');
+    thisEpisode.attr('data-state', 'on');
+
+    //Change button state
+    allIcons.removeClass('fa-pause').addClass('fa-play');
+    icon.removeClass('fa-play').addClass('fa-pause');
+
+
+}
+function handleOffState(instance) {
+    var thisEpisode = instance.closest('.singleEpisode');
+    var icon = instance.children('i');
+    //
+    thisEpisode.removeClass('singleEpisode--state-playing');
+    thisEpisode.attr('data-state', 'off');
+    //
+    allIcons.removeClass('fa-pause').addClass('fa-play');
+    icon.removeClass('fa-pause').addClass('fa-play');
+
+}
+function scrollTest(){
+    var scrollCap = $(window).scrollTop();
+    if(scrollCap >= 200){
+        $('.js-top').removeClass('state-hide');
+
+    }else{
+        $('.js-top').addClass('state-hide');
+    }
+
+}
+
 //------------------DOC READY------------------//
 $(document).ready(function () {
+
+    $(window).scroll(function(){
+        scrollTest();
+    });
+
+    //Initialize audo element
     $('.audio').mediaelementplayer({
         features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
     });
-// Select all links with hashes
-    $("a[href^='#']").click(function (e) {
+
+    // Smooth scroll
+    $(".js-top").click(function (e) {
         e.preventDefault();
 
         var position = $($(this).attr("href")).offset().top;
@@ -140,59 +201,28 @@ $(document).ready(function () {
             scrollTop: position
         } /* speed */);
     });
+
+    //Load Podcast feed
     loadFeed("https://www.spreaker.com/show/3133182/episodes/feed", "SQfeed");
 
+    //Load more episodes click event
     $('.js-load-btn').on('click', function () {
         loadMoreSQ();
     });
 
-    //New error handling
-    // setTimeout(function () {
-    //     if ($('.js-news-wrap a').length < 1) {
-    //         $('.js-news-wrap .main__contentBlock-subhead ').html("Error loading feed, please reload page.")
-    //     }
-    // }, 2000);
-
-    $('.mejs-playpause-button').on('click', function () {
+    $('body').on('mousedown', '.mejs-button', function () {
         turnOffSingles();
     });
 
     $(document).on('click', '.js-single-playButton', function () {
-
-        var allEpisodes = $('.singleEpisode');
-        var thisEpisode = $(this).closest('.singleEpisode');
-        var icon = $(this).children('i');
-        var allIcons = $('.singleEpisode__playButton i.fa');
-        function handleOnState(){
-            turnOffFeature();
-            //Reset all episodes
-            allEpisodes.removeClass('singleEpisode--state-playing');
-            allEpisodes.attr('data-state', 'off');
-
-            //Turn on this episode
-            thisEpisode.addClass('singleEpisode--state-playing');
-            thisEpisode.attr('data-state', 'on');
-
-            //Change button state
-            allIcons.removeClass('fa-pause').addClass('fa-play');
-            icon.removeClass('fa-play').addClass('fa-pause');
-        }
-        function handleOffState(){
-            //
-            thisEpisode.removeClass('singleEpisode--state-playing');
-            thisEpisode.attr('data-state', 'off');
-            //
-            allIcons.removeClass('fa-pause').addClass('fa-play');
-            icon.removeClass('fa-pause').addClass('fa-play');
-        }
-
-
-        if (thisEpisode.attr('data-state') === 'off') {
-            handleOnState();
+        if ($(this).closest('.singleEpisode').attr('data-state') === 'off') {
+            handleOnState($(this));
         } else {
-            handleOffState();
 
+            handleOffState($(this));
         }
-
+        turnOffFeat();
+        triggerSingleAudio($(this));
     });
+
 });

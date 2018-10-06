@@ -1,5 +1,5 @@
 .backToTop {
-
+  @include transition(all 150ms ease-in-out);
   background: #000000;
   padding: $space-sm;
   max-width: 50px;
@@ -10,6 +10,7 @@
   text-align: center;
   position: fixed;
   right: 0;
+  text-decoration:none;
   bottom: 10px;
   i {
     width: 100%;
@@ -18,5 +19,13 @@
   @media all and (max-width: $space-md) {
     padding: 15px;
   }
-
+  &.state-hide{
+    @include transition(all 150ms ease-in-out);
+    opacity:0;
+    width:0;
+  }
+  &:hover{
+    @include transition(all 150ms ease-in-out);
+    color:white;
+  }
 }

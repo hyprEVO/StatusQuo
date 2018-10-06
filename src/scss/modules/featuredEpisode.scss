@@ -7,7 +7,6 @@
     background: black;
     padding: $space-md;
   }
-
   &__title {
     color: white;
     font-family: $sqBodyFont;
@@ -45,7 +44,6 @@
       line-height: 1.7rem;
     }
   }
-
   &__bottom {
   }
   &__download {
@@ -63,13 +61,20 @@
       @include transition(all 250ms ease-in-out);
       color: white;
     }
-  ;
+
   }
+  &--state-playing {
+    .singleEpisode__description {
+      color: white;
+      @include transition(all 250ms ease-in-out);
+    }
 
-}
-
-#mep_0 > div > div.mejs-controls > div.mejs-button.mejs-playpause-button.mejs-play {
-
+    .singleEpisode__wrap {
+      -webkit-box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
+      -moz-box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
+      box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
+    }
+  }
 }
 
 body {
