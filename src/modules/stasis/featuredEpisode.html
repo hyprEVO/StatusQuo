@@ -3,10 +3,15 @@
 <div class="featEpisode">
     <div class="featEpisode__wrap">
         <span class="featEpisode__title">This is an episode title etc </span>
-        <div class="featEpisode__playBar">
-            <span class="featEpisode__playButton"><i class="fa fa-play"></i></span>
-            <span class="featEpisode__time">1:12:34</span>
-        </div>
+        <!--<div class="featEpisode__playBar">-->
+            <!--<span class="featEpisode__playButton"><i class="fa fa-play"></i></span>-->
+            <!--<span class="featEpisode__time">1:12:34</span>-->
+        <!--</div>-->
+        <!--<br>-->
+        <audio class="audio" controls="controls">
+            <source type="audio/mpeg"
+                    src="http://media.blubrry.com/codepen_radio/p/codepen-podcast.s3.amazonaws.com/100.mp3?_=1">
+        </audio>
         <div class="featEpisode__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
             asperiores aspernatur, assumenda beatae commodi cum dignissimos dolor dolores ducimus, eius esse facere
             labore mollitia natus nemo nesciunt nobis nostrum nulla optio pariatur placeat praesentium provident quis
@@ -14,9 +19,11 @@
             fugit ipsam, modi necessitatibus nihil non perspiciatis quaerat quasi quibusdam recusandae reprehenderit
         </div>
         <div class="featEpisode__bottom">
-            <div class="featEpisode__download">
+            <a class="featEpisode__download" href="http://media.blubrry.com/codepen_radio/p/codepen-podcast.s3.amazonaws.com/100.mp3" download>
                 <i class="fa fa-download"></i>Download
-            </div>
+            </a>
         </div>
     </div>
+
+
 </div>

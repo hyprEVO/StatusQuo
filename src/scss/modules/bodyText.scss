@@ -1,0 +1,24 @@
+.bodyText {
+  padding: $space-md $space-xl;
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  @include clearfix();
+  font-size: 22px;
+  font-family: $sqHeadingFont;
+  p {
+    position: relative;
+    max-width: 940px;
+    &:before {
+      content: "";
+      height: 5px;
+      width: 40px;
+      background: $sq-red;
+      display: block;
+
+      top: -25px;
+      left: 0;
+      position: absolute;
+    }
+  }
+}

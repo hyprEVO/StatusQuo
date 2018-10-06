@@ -1,0 +1,81 @@
+.header {
+  padding: $space-md $space-xl;
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  @include clearfix();
+  &__logo-wrap {
+    float: left;
+    width: 100%;
+    max-width: 235px;
+    img {
+
+    }
+    @media all and(max-width: $screen-md) {
+      max-width: 100%;
+      width: 235px;
+      float: none;
+      margin: 0 auto;
+      display: block;
+      img {
+        margin: 0 auto;
+        display: block;
+
+      }
+    }
+  }
+  &__social {
+    width: 100%;
+    display: block;
+    text-align: right;
+    margin: 0 auto $space-sm auto;
+    max-width: 365px;
+    padding: 0;
+    @include radius(6px);
+    li {
+      display: inline-block;
+      margin: 0 $space-sm $space-sm 0;
+      @media all and(min-width: $screen-sm) {
+        margin: 0 0 0 $space-md;
+      }
+      a {
+         @include transition(all 350ms ease-in-out);
+        color: $inactiveGrey;
+        i {
+          padding-top: $space-sm;
+          font-size: 20px;
+        }
+        &:hover {
+           @include transition(all 350ms ease-in-out);
+          color: white;
+        }
+      }
+    }
+    @media all and(max-width: $screen-md) {
+      width: 100%;
+      float: none;
+      margin: 0 auto;
+      text-align: center;
+      li {
+        margin: 0 $space-sm;
+        a {
+
+        }
+      }
+
+    }
+    &-wrap {
+      float: right;
+      //background: blue;
+      @media all and(max-width: $screen-md) {
+        float: none;
+      }
+    }
+
+  }
+}
+.SD-heading {
+  padding-left: 15px;
+  font-family: $haHead;
+  border-bottom: 1px solid #1f1f1f;
+}

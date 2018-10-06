@@ -108,29 +108,91 @@ function toggleState() {
     console.log('state', globalData.state);
 }
 
+function turnOffFeature() {
+    var playBtn = $('.featEpisode .mejs-playpause-button');
 
+    if (playBtn.hasClass('mejs-pause')) {
+        playBtn.trigger('click');
+    }
+
+}
+function turnOffSingles() {
+    var allEpisodes = $('.singleEpisode');
+    allEpisodes.each(function () {
+        if($(this).attr('data-state') === "on"){
+            $(this).find('.js-single-playButton').trigger('click');
+        }
+    });
+
+}
 //------------------DOC READY------------------//
 $(document).ready(function () {
+    $('.audio').mediaelementplayer({
+        features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
+    });
 // Select all links with hashes
-    $("a[href^='#']").click(function(e) {
+    $("a[href^='#']").click(function (e) {
         e.preventDefault();
 
         var position = $($(this).attr("href")).offset().top;
 
         $("body, html").animate({
             scrollTop: position
-        } /* speed */ );
+        } /* speed */);
     });
     loadFeed("https://www.spreaker.com/show/3133182/episodes/feed", "SQfeed");
 
     $('.js-load-btn').on('click', function () {
         loadMoreSQ();
     });
-    console.log('gd', globalData);
+
     //New error handling
     // setTimeout(function () {
     //     if ($('.js-news-wrap a').length < 1) {
     //         $('.js-news-wrap .main__contentBlock-subhead ').html("Error loading feed, please reload page.")
     //     }
     // }, 2000);
+
+    $('.mejs-playpause-button').on('click', function () {
+        turnOffSingles();
+    });
+
+    $(document).on('click', '.js-single-playButton', function () {
+
+        var allEpisodes = $('.singleEpisode');
+        var thisEpisode = $(this).closest('.singleEpisode');
+        var icon = $(this).children('i');
+        var allIcons = $('.singleEpisode__playButton i.fa');
+        function handleOnState(){
+            turnOffFeature();
+            //Reset all episodes
+            allEpisodes.removeClass('singleEpisode--state-playing');
+            allEpisodes.attr('data-state', 'off');
+
+            //Turn on this episode
+            thisEpisode.addClass('singleEpisode--state-playing');
+            thisEpisode.attr('data-state', 'on');
+
+            //Change button state
+            allIcons.removeClass('fa-pause').addClass('fa-play');
+            icon.removeClass('fa-play').addClass('fa-pause');
+        }
+        function handleOffState(){
+            //
+            thisEpisode.removeClass('singleEpisode--state-playing');
+            thisEpisode.attr('data-state', 'off');
+            //
+            allIcons.removeClass('fa-pause').addClass('fa-play');
+            icon.removeClass('fa-pause').addClass('fa-play');
+        }
+
+
+        if (thisEpisode.attr('data-state') === 'off') {
+            handleOnState();
+        } else {
+            handleOffState();
+
+        }
+
+    });
 });

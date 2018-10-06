@@ -1,0 +1,121 @@
+.singleEpisode {
+  margin: 10px;
+  flex-basis: calc(25% - 20px);
+  @media (max-width: $screen-xl) {
+    flex-basis: calc(33.333% - 20px);
+  }
+  @media (max-width: 1220px) {
+    flex-basis: calc(50% - 20px);
+  }
+  @media (max-width: $screen-md) {
+    flex-basis: 100%;
+  }
+  &__flexContain {
+    overflow: hidden;
+  }
+  &__wrap {
+
+    background: #000000;
+    padding: $space-md;
+    @include transition(all 250ms ease-in-out);
+    &:hover{
+      @include transition(all 250ms ease-in-out);
+      -webkit-box-shadow: -1px -6px 0px -5px rgba(160,43,49,1);
+      -moz-box-shadow: -1px -6px 0px -5px rgba(160,43,49,1);
+      box-shadow: -1px -6px 0px -5px rgba(160,43,49,1);
+    }
+  }
+  &__contain {
+    padding: $space-md $space-xl;
+    @media all and(max-width: $screen-md) {
+      padding: $space-md $space-md;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    @media (min-width: 600px) {
+      margin: -10px;
+    }
+  }
+  &__title {
+    color: white;
+    font-family: $sqBodyFont;
+    font-weight: 700;
+    font-size: 18px;
+    padding-bottom: $space-md;
+    display: block;
+    text-transform: uppercase;
+
+  }
+  &__playBar {
+    background: $dark-grey;
+    padding: $space-sm;
+    @include clearfix();
+  }
+  &__playButton {
+    color: $sq-red;
+    float: right;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  &__time {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    float: left;
+    padding: 6px $space-sm $space-xs 0;
+    margin-right: $space-sm;
+    border-right: 1px solid #2b2b2b;
+    @media (max-width: 1220px) {
+      display: none;
+    }
+  }
+  &__description {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    margin-bottom: $space-md;
+    line-height: 1.5rem;
+    font-size: 14px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    @include transition(all 250ms ease-in-out);
+  }
+  &__bottom {
+  }
+  &__download {
+    @include transition(all 250ms ease-in-out);
+    display: inline-block;
+    padding: $space-xs 0;
+    cursor: pointer;
+    color: $inactiveGrey;
+    font-family: $sqBodyFont;
+    font-size: 14px;
+    @media (max-width: 1220px) {
+      width: 100%;
+      border: none;
+      text-align: center;
+      background: #171717;
+    }
+    i {
+      padding-right: $space-xs;
+    }
+    &:hover {
+      @include transition(all 250ms ease-in-out);
+      color: white;
+    }
+  ;
+  }
+  &--state-playing{
+    .singleEpisode__description{
+      color:white;
+      @include transition(all 250ms ease-in-out);
+    }
+
+    .singleEpisode__wrap{
+      -webkit-box-shadow: inset 0px 0px 0px 1px rgba(160,43,49,1);
+      -moz-box-shadow: inset 0px 0px 0px 1px rgba(160,43,49,1);
+      box-shadow: inset 0px 0px 0px 1px rgba(160,43,49,1);
+    }
+  }
+}

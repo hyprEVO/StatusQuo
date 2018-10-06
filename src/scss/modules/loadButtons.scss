@@ -1,0 +1,29 @@
+.loadButton {
+  background: #000000;
+  float: left;
+  color: $inactiveGrey;
+  padding: $space-md;
+  font-family: $sqBodyFont;
+  clear: both;
+  box-sizing: border-box;
+  cursor: pointer;
+  i {
+    color: white;
+    padding-right: $space-sm;
+  }
+  &:hover {
+    color: white;
+  }
+  @media all and(max-width: $screen-md) {
+    float: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+
+  }
+  @media all and(max-width: $screen-sm) {
+    font-size: 13px;
+    padding: $space-sm;
+
+  }
+}

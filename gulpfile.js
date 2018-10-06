@@ -142,7 +142,7 @@ gulp.task('watch', function () {
     gulp.watch(['./src/*.html', './src/modules/*.html', './src/modules/stasis/*.html', './src/*.html'], ['make-html', 'make-rest', 'reload']);
     gulp.watch(['./src/*.php'], ['make-html', 'make-rest', 'reload']);
     gulp.watch(['./src/scss/*.scss', './src/scss/*/*.scss'], ['make-html', 'make-styles', 'reload']);
-    gulp.watch(['./src/js/**/*.js'], ['make-html', 'make-rest', 'reload']);
+    gulp.watch(['./src/js/**/*.js'], ['make-html', 'make-js','make-rest', 'reload']);
     gulp.watch(['./src/img/**'], ['make-rest', 'reload']);
 });
 

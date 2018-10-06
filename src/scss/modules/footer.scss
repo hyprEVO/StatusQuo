@@ -133,25 +133,3 @@
   }
 }
 
-.backToTop {
-
-  background: #000000;
-  padding: $space-sm;
-  max-width: 50px;
-  cursor: pointer;
-  font-family: $sqBodyFont;
-  font-size: 13px;
-  color: $inactiveGrey;
-  text-align: center;
-  position: fixed;
-  right: 0;
-  bottom: 10px;
-  i {
-    width: 100%;
-    text-align: center;
-  }
-  @media all and (max-width: $space-md) {
-    padding: 15px;
-  }
-
-}

@@ -1,0 +1,236 @@
+.featEpisode {
+  padding: $space-md $space-xl;
+  @media all and(max-width: $screen-md) {
+    padding: $space-md $space-md;
+  }
+  &__wrap {
+    background: black;
+    padding: $space-md;
+  }
+
+  &__title {
+    color: white;
+    font-family: $sqBodyFont;
+    font-weight: 700;
+    font-size: 25px;
+    padding-bottom: $space-md;
+    display: block;
+
+  }
+  &__playBar {
+    background: $dark-grey;
+    padding: $space-sm;
+    @include clearfix();
+  }
+  &__playButton {
+    color: $sq-red;
+    float: left;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  &__time {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    float: right;
+  }
+  &__description {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    padding-top: $space-md;
+    line-height: 2rem;
+    font-size: 1.3rem;
+    padding-bottom: $space-md;
+    @media all and(max-width: $screen-sm) {
+      font-size: 1rem;
+      line-height: 1.7rem;
+    }
+  }
+
+  &__bottom {
+  }
+  &__download {
+    @include transition(all 250ms ease-in-out);
+    display: inline-block;
+    padding: $space-xs 0;
+    cursor: pointer;
+    text-decoration: none;
+    color: $inactiveGrey;
+    font-family: $sqBodyFont;
+    i {
+      padding-right: $space-xs;
+    }
+    &:hover {
+      @include transition(all 250ms ease-in-out);
+      color: white;
+    }
+  ;
+  }
+
+}
+
+#mep_0 > div > div.mejs-controls > div.mejs-button.mejs-playpause-button.mejs-play {
+
+}
+
+body {
+  .mejs-container {
+    background: $dark-grey;
+    text-align: left;
+    vertical-align: top;
+    text-indent: 0;
+    width: 100% !important;
+    height: 50px !important;
+
+  }
+
+  .mejs-container .mejs-controls {
+    height: 100%;
+    background: transparent;
+    display: flex;
+  }
+
+  .mejs-controls .mejs-time-rail span,
+  .mejs-controls .mejs-time-rail a {
+    display: block;
+    width: 180px;
+    height: 100%;
+    border-radius: 0px;
+    cursor: pointer;
+  }
+
+  .mejs-controls div.mejs-time-rail {
+    padding-top: initial;
+    height: 100%;
+  }
+
+  .mejs-controls .mejs-time-rail .mejs-time-total {
+    margin: 0;
+    background: $dark-grey !important;
+  }
+
+  .mejs-container .mejs-controls .mejs-time {
+    color: $inactiveGrey;
+    font-family: $sqHeadingFont;
+    float: right;
+    font-size: 17px;
+    padding: $space-sm;
+  }
+
+  .mejs-container .mejs-controls .mejs-time {
+
+  }
+
+  .mejs-controls .mejs-time-rail .mejs-time-float-corner {
+    display: none;
+  }
+
+  .mejs-controls .mejs-time-rail .mejs-time-float {
+    position: absolute;
+    background: #000;
+    width: 46px;
+    height: 20px;
+    border: none;
+    top: -25px;
+    margin-left: -18px;
+    text-align: center;
+    color: #fff;
+    border-radius: 3px;
+  }
+
+  .mejs-controls .mejs-time-rail .mejs-time-float-current {
+    margin: 0;
+    margin-top: 4px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    left: 0;
+  }
+
+  .mejs-container .mejs-controls div {
+    height: 100%;
+    width: 50px;
+    position: relative;
+  }
+
+  .mejs-controls .mejs-button button {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: 0 !important;
+    background: transparent;
+    outline: none;
+  }
+
+  .mejs-controls .mejs-play:after {
+    position: absolute;
+
+    width: 17px;
+    height: 22px;
+    color: $sq-red;
+    top: 9px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    transition: all 100ms linear;
+    pointer-events: none;
+    font-size: 1.5rem;
+    content: "\f04b";
+    font-family: FontAwesome;
+  }
+
+  .mejs-controls .mejs-pause:after {
+    position: absolute;
+
+    font-size: 1.3rem;
+    content: "\f04c";
+    font-family: FontAwesome;
+    width: 13px;
+    height: 22px;
+    top: 9px;
+    color: $sq-red;
+    left: -3px;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    transition: all 100ms linear;
+    pointer-events: none;
+  }
+
+  .mejs-controls .mejs-time-rail .mejs-time-total {
+    background: #292929;
+    margin: 0;
+  }
+
+  .mejs-controls .mejs-time-rail .mejs-time-loaded {
+    background: #3c3838;
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent));
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+    background-size: 50px 50px;
+    animation: move 3s linear infinite;
+    opacity: 0.1;
+  }
+
+  .mejs-controls .mejs-time-rail .mejs-time-current {
+    background: linear-gradient(to right, $sq-red, $sq-red);
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .mejs-controls .mejs-button button:focus {
+    outline: none;
+  }
+
+  @-webkit-keyframes move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 50px 50px;
+    }
+  }
+}
