@@ -1,4 +1,25 @@
+pre-launch actions
+_____
 Google analytics
 twitter ograph
 fb ograph
 desc
+---
+Button function lifecycle:
+
+de-trigger all other visual
+de-trigger all other audio
+
+trigger visual state
+trigger audio state
+
+can i control click element with js
+
+--
+Load more buttons (elegent rendering of singleEp module??)
+single download button style update
+Full description modal
+Sticky mini header
+rounded corners?
+background color/image??
+wp integration 

@@ -1,6 +1,7 @@
 .loadButton {
   @include transition(all 150ms ease-in-out);
-  background: #000000;
+
+  background-color:#101010;
   float: left;
   color: $inactiveGrey;
   padding: $space-md;
@@ -14,7 +15,7 @@
   }
   &:hover {
     @include transition(all 150ms ease-in-out);
-    background-color:#101010;
+    background: #000000;
     color: white;
     i{
       color:$sq-red;

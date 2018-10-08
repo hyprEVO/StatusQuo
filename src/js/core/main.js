@@ -27,6 +27,7 @@ Handlebars.registerHelper('extractURL', function (url) {
     return elem['src'];
 });
 
+
 //Easy method for handlebars rendering
 function doHandlebars(data, template, container, place) {
     var theTemplate = $(template).html();
@@ -75,13 +76,43 @@ function handleResponseSQfeed(response) {
 
     //make global data relevent
     globalData.response = response.query.results.feed.entry;
+    var numberOfEpisodes = globalData.response.length + 1;
 
+    for (var i = 0; i < globalData.response.length; i++) {
+        var episodeNumber = numberOfEpisodes - i;
+        var introString = 'Straight Games, No Filler: Marz V and Queasy Crayfish present STATUS QUO';
+        var introStringAlt = 'Marz Vindicator and Queasy Crayfish present Status Quo: Straight Games, No Filler.';
+        var introStringAlt2 = 'Marz Vindicator and Queasy Crayfish present Status Quo, your weekly podcast for gaming trends past and present!';
+        console.log(numberOfEpisodes - i, globalData.response[i]);
+        globalData.response[i].episodeNumber = episodeNumber;
+        if(globalData.response[i].hasOwnProperty('description')){
+            var descPath = globalData.response[i].description.content;
+            var firstPass = descPath.replace(introString,' ');
+            var secondPass = firstPass.replace(introStringAlt,' ');
+            var thirdPass =  secondPass.replace(introStringAlt2,' ');
+            globalData.response[i].description.content = secondPass.replace(introStringAlt2,' ');
+        }else {
+            globalData.response[i].description = {};
+            globalData.response[i].description.content = globalData.response[i].title;
 
-    doHandlebars(globalData.response.slice(0, 1), "#js-testData-template", ".js-testDataFeat-wrap", "append");
-    doHandlebars(globalData.response.slice(1, 7), "#js-oldEp-template", ".js-testData-wrap", "append");
-    doHandlebars(contentObj, "#js-subTitle-template", ".js-subTitle-wrap", "html");
+        }
+    }
+
+    console.log('global data', globalData);
+
+    //feat episode
+    doHandlebars(globalData.response.slice(0, 1), "#js-template-featEpisode", ".js-render-featEpisode", "html");
+
+    doHandlebars(globalData.response.slice(1, 9), "#js-template-singleEpisode", ".js-render-singleEpisode", "html");
+
+    //Subtext
+    doHandlebars(contentObj, "#js-template-bodyText", ".js-render-bodyText", "html");
     console.log('cleandata', cleanData);
     console.log('contentObj', contentObj);
+
+    $('.js-audio').mediaelementplayer({
+        features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
+    });
 }
 
 function updateButtonText() {
@@ -135,9 +166,6 @@ function turnOffSingles() {
     });
 
 }
-function turnOffFeat(){
-
-}
 function handleOnState(instance) {
     var thisEpisode = instance.closest('.singleEpisode');
     var icon = instance.children('i');
@@ -168,12 +196,12 @@ function handleOffState(instance) {
     icon.removeClass('fa-pause').addClass('fa-play');
 
 }
-function scrollTest(){
+function scrollTest() {
     var scrollCap = $(window).scrollTop();
-    if(scrollCap >= 200){
+    if (scrollCap >= 200) {
         $('.js-top').removeClass('state-hide');
 
-    }else{
+    } else {
         $('.js-top').addClass('state-hide');
     }
 
@@ -182,14 +210,10 @@ function scrollTest(){
 //------------------DOC READY------------------//
 $(document).ready(function () {
 
-    $(window).scroll(function(){
+    $(window).scroll(function () {
         scrollTest();
     });
 
-    //Initialize audo element
-    $('.audio').mediaelementplayer({
-        features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
-    });
 
     // Smooth scroll
     $(".js-top").click(function (e) {
@@ -224,5 +248,6 @@ $(document).ready(function () {
         turnOffFeat();
         triggerSingleAudio($(this));
     });
+    //Initialize audo element
 
 });

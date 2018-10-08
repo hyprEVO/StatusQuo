@@ -187,3 +187,61 @@
     <p>{{this.subTitle}}</p>
     {{/each}}
 </script>
+
+
+<script type="text/x-handlebars-template" id="js-template-bodyText">
+    {{#each this}}
+    {{this.subTitle}}
+    {{/each}}
+</script>
+<script type="text/x-handlebars-template" id="js-template-featEpisode">
+    {{#each this}}
+
+
+    <span class="featEpisode__title">{{this.title}}</span>
+    <audio class="audio js-audio" controls="controls">
+        <source type="audio/mpeg"
+                src="{{this.link.1.href}}">
+    </audio>
+    <div class="featEpisode__description"> {{this.description.content}}
+    </div>
+    <div class="featEpisode__bottom">
+        <a class="featEpisode__download"
+           href="{{this.link.1.href}}" target="_blank" download>
+            <i class="fa fa-download"></i>Download
+        </a>
+    </div>
+
+
+    {{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="js-template-singleEpisode">
+    {{#each this}}
+
+
+    <div class="singleEpisode" data-state="off">
+        <audio class="js-audio audio" controls="controls">
+            <source type="audio/mpeg"
+                    src="{{this.link.1.href}}">
+        </audio>
+        <div class="singleEpisode__wrap">
+            <span class="singleEpisode__title">Episode #{{this.episodeNumber}} <span
+                    class="singleEpisode__playButton js-single-playButton"><i
+                    class="fa fa-play"></i></span></span>
+
+            <div class="singleEpisode__description">{{this.description.content}}
+
+            </div>
+            <div class="singleEpisode__bottom">
+                <span class="singleEpisode__time mejs-currenttime">1:12:34</span>
+                <div class="singleEpisode__download">
+                    <i class="fa fa-download"></i>Download
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{/each}}
+</script>

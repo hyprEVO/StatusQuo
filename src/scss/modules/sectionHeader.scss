@@ -1,5 +1,5 @@
 .sectionHeader {
-  padding: $space-md $space-xl;
+  padding: $space-md $space-xl $space-xs $space-xl;
   @media all and(max-width: $screen-md) {
     padding: $space-md $space-md;
   }
