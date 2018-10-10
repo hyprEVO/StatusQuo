@@ -22,4 +22,4 @@ Full description modal
 Sticky mini header
 rounded corners?
 background color/image??
-wp integration 
+wp integration

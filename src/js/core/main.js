@@ -1,35 +1,29 @@
 /**
  * Main.js
  * Misc global scripting.
- *
- *
- * @license -
- * @version 0.0beta
- * @author  hyprEVO Engineering: Lance Porter
+ * @author  Lance Porter
  *
  *
  */
+//------------------------------------VARIABLES------------------------------------//
 
-//------------------METHODS------------------//
-
+//Global object where state and episode data is stored
 var globalData = {};
+
+//We'll see about these guys
 var allEpisodes = $('.singleEpisode');
 var allIcons = $('.singleEpisode__playButton i.fa');
 
+//Set default state to closed (number of episodes displayed)
 globalData.state = 'closed';
 
 
-//Helper function to extract img path from rss content
-Handlebars.registerHelper('extractURL', function (url) {
-    var tmp = document.createElement('div');
-    tmp.innerHTML = url;
-    var elem = tmp.getElementsByTagName('img')[0];
-    return elem['src'];
-});
+//------------------------------------METHODS------------------------------------//
 
+//----------------------CORE RENDER METHODS----------------------//
 
 //Easy method for handlebars rendering
-function doHandlebars(data, template, container, place) {
+function renderModule(data, template, container, place) {
     var theTemplate = $(template).html();
     var compiledTemplate = Handlebars.compile(theTemplate);
     if (place === "prepend") {
@@ -41,24 +35,7 @@ function doHandlebars(data, template, container, place) {
     }
 }
 
-//Easy method for encoding url then injecting needed YQL script to get feed
-function loadFeed(url, key) {
-
-    var encoded = encodeURIComponent(url);
-    // https://developer.yahoo.com/yql/console/
-    //JSON encoded RSS feed URL
-    // var GSjson = "'https%3A%2F%2Fwww.gamespot.com%2Ffeeds%2Fnews%2F'";
-    // var GIjson = "'http%3A%2F%2Fwww.gameinformer.com%2Fb%2Fmainfeed.aspx%3FTags%3Dnews'";
-    // var IGjson = "'http%3A%2F%2Ffeeds.ign.com%2Fign%2Fgames-articles%3Fformat%3Dxml'";
-    // var gplus = "'https%3A%2F%2Fgplusrss.com%2Frss%2Ffeed%2F401998a8df00674724fd89e57dc54d8e5a5fcbc8589f4'";
-//Queries yahoo API AND initiates callback
-    var concatFeedUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20feednormalizer%20where%20url%3D'" + encoded + "'%20and%20output%3D'atom_1.0'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=handleResponse" + key;
-
-    injectScript(concatFeedUrl);
-
-}
-
-//Method that injects a script with proper dynamic ref using YQL to translate RSS into JSON
+//Method that creates a script element in the dom that executes YQL query
 function injectScript(url) {
     var scriptElement = document.createElement('script');
     scriptElement.type = 'text/javascript';
@@ -66,96 +43,109 @@ function injectScript(url) {
     $('head').append(scriptElement);
 }
 
-//-- RSS RESPONSE METHODS --
-//Methods used by inject script on how to handle the JSON response, includes key for different response
-//SQ RSS Feed
+//Method accepts a url and a 'key' that acts as a suffix
+//Encodes url then concats that with YQL url query
+// If data is retrieved successfully then it fires a callback...using the key suffix allows for multiple callbacks to be easily created
+function loadFeed(url, key) {
+    var encoded = encodeURIComponent(url);
+    var queryOpen = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20feednormalizer%20where%20url%3D'";
+    var queryClose = "'%20and%20output%3D'atom_1.0'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=handleResponse";
+
+    //Queries yahoo API AND initiates callback
+    var concatFeedUrl = queryOpen + encoded + queryClose + key;
+    injectScript(concatFeedUrl);
+}
+
+//Callback function from loadFeed() that takes in the succesful response data as an arg
 function handleResponseSQfeed(response) {
-    var cleanData = response.query.results.feed.entry;
-    var subTitle = response.query.results.feed.subtitle["0"];
-    var contentObj = [{subTitle: subTitle}];
 
-    //make global data relevent
-    globalData.response = response.query.results.feed.entry;
-    var numberOfEpisodes = globalData.response.length + 1;
+    //Store episode data in globalData object
+    globalData.episodeData = response.query.results.feed.entry;
 
-    for (var i = 0; i < globalData.response.length; i++) {
-        var episodeNumber = numberOfEpisodes - i;
-        var introString = 'Straight Games, No Filler: Marz V and Queasy Crayfish present STATUS QUO';
-        var introStringAlt = 'Marz Vindicator and Queasy Crayfish present Status Quo: Straight Games, No Filler.';
-        var introStringAlt2 = 'Marz Vindicator and Queasy Crayfish present Status Quo, your weekly podcast for gaming trends past and present!';
-        console.log(numberOfEpisodes - i, globalData.response[i]);
-        globalData.response[i].episodeNumber = episodeNumber;
-        if(globalData.response[i].hasOwnProperty('description')){
-            var descPath = globalData.response[i].description.content;
-            var firstPass = descPath.replace(introString,' ');
-            var secondPass = firstPass.replace(introStringAlt,' ');
-            var thirdPass =  secondPass.replace(introStringAlt2,' ');
-            globalData.response[i].description.content = secondPass.replace(introStringAlt2,' ');
-        }else {
-            globalData.response[i].description = {};
-            globalData.response[i].description.content = globalData.response[i].title;
+    //Traverse object and find subtitle  then store it in its own arrray for passing into render function
+    var subTitle = [{subTitle: response.query.results.feed.subtitle["0"]}];
 
+    //Establish and store number of episodes based on returned data (add 1 since the array is 0 indexed)
+    var numberOfEpisodes = globalData.episodeData.length + 1;
+
+    //Traverse through each episode object in epdata array
+    for (var i = 0; i < globalData.episodeData.length; i++) {
+        var stringsToRemove = {};
+
+        //Calculate instance episode number and store in new property
+        globalData.episodeData[i].episodeNumber = numberOfEpisodes - i;
+
+        //Strings I want removed episode descriptions
+        stringsToRemove.string1 = 'Straight Games, No Filler: Marz V and Queasy Crayfish present STATUS QUO';
+        stringsToRemove.string2 = 'Marz Vindicator and Queasy Crayfish present Status Quo: Straight Games, No Filler.';
+        stringsToRemove.string3 = 'Marz Vindicator and Queasy Crayfish present Status Quo, your weekly podcast for gaming trends past and present!';
+
+        //Check to see if instance has desc property..if so remove
+        if (globalData.episodeData[i].hasOwnProperty('description')) {
+            var descPath = globalData.episodeData[i].description.content;
+            var firstPass = descPath.replace(stringsToRemove.string1, ' ');
+            var secondPass = firstPass.replace(stringsToRemove.string2, ' ');
+            globalData.episodeData[i].description.content = secondPass.replace(stringsToRemove.string3, ' ');
+        } else {
+            //If no description then set the title as description instead
+            globalData.episodeData[i].description = {};
+            globalData.episodeData[i].description.content = globalData.episodeData[i].title;
         }
     }
 
-    console.log('global data', globalData);
+    //Render subtitle
+    renderModule(subTitle, "#js-template-bodyText", ".js-render-bodyText", "html");
+    //Render featured episode (get latest entry from array)
+    renderModule(globalData.episodeData.slice(0, 1), "#js-template-featEpisode", ".js-render-featEpisode", "html");
+    //Render the next 8 single episodes
+    renderModule(globalData.episodeData.slice(1, 9), "#js-template-singleEpisode", ".js-render-singleEpisode", "html");
 
-    //feat episode
-    doHandlebars(globalData.response.slice(0, 1), "#js-template-featEpisode", ".js-render-featEpisode", "html");
+    //Initialize medialayer audio elements since they are dynamic...
+    renderAudio();
+}
 
-    doHandlebars(globalData.response.slice(1, 9), "#js-template-singleEpisode", ".js-render-singleEpisode", "html");
-
-    //Subtext
-    doHandlebars(contentObj, "#js-template-bodyText", ".js-render-bodyText", "html");
-    console.log('cleandata', cleanData);
-    console.log('contentObj', contentObj);
-
+//Method that initializes audio elements
+function renderAudio() {
     $('.js-audio').mediaelementplayer({
         features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
     });
 }
+//Load more button methods
+// function updateButtonText() {
+//     if (globalData.state === 'open') {
+//         $('.js-load-btn').html('Hide Epidsodes');
+//         return
+//     }
+//     $('.js-load-btn').html('Show More Epidsodes');
+// }
+// function loadMoreSQ() {
+//     var cleanData = globalData.episodeData;
+//     if (globalData.state === 'closed') {
+//         renderModule(cleanData.slice(7, 100), "#js-oldEp-template", ".js-testData-wrap", "append");
+//         toggleState();
+//         updateButtonText();
+//     } else {
+//         renderModule(cleanData.slice(1, 7), "#js-oldEp-template", ".js-testData-wrap", "html");
+//         toggleState();
+//         updateButtonText();
+//     }
+// }
+// function toggleState() {
+//     if (globalData.state === 'open') {
+//         globalData.state = 'closed';
+//     } else {
+//         globalData.state = 'open'
+//     }
+// }
 
-function updateButtonText() {
-    if (globalData.state === 'open') {
-        $('.js-load-btn').html('Hide Epidsodes');
-        return
-    }
-    $('.js-load-btn').html('Show More Epidsodes');
-}
-function loadMoreSQ() {
-    var cleanData = globalData.response;
-    if (globalData.state === 'closed') {
-        doHandlebars(cleanData.slice(7, 100), "#js-oldEp-template", ".js-testData-wrap", "append");
-        toggleState();
-        updateButtonText();
-    } else {
-        doHandlebars(cleanData.slice(1, 7), "#js-oldEp-template", ".js-testData-wrap", "html");
-        toggleState();
-        updateButtonText();
-    }
-}
-function toggleState() {
-    if (globalData.state === 'open') {
-        globalData.state = 'closed';
-    } else {
-        globalData.state = 'open'
-    }
 
-    console.log('state', globalData.state);
-}
+//----------------------MEDIA STATE METHODS----------------------//
+
 function turnOffFeat() {
     var playBtn = $('.featEpisode .mejs-playpause-button');
     if (playBtn.hasClass('mejs-pause')) {
         playBtn.trigger('click');
     }
-}
-function triggerSingleAudio(instance) {
-    var parentIndex = instance.closest('.singleEpisode').index();
-    var playBtn = $('.singleEpisode').eq(parentIndex).find($(' .mejs-playpause-button'));
-
-    playBtn.click();
-
-
 }
 function turnOffSingles() {
     var allEpisodes = $('.singleEpisode');
@@ -166,6 +156,7 @@ function turnOffSingles() {
     });
 
 }
+
 function handleOnState(instance) {
     var thisEpisode = instance.closest('.singleEpisode');
     var icon = instance.children('i');
@@ -196,26 +187,34 @@ function handleOffState(instance) {
     icon.removeClass('fa-pause').addClass('fa-play');
 
 }
-function scrollTest() {
+
+function triggerSingleAudio(instance) {
+    var parentIndex = instance.closest('.singleEpisode').index();
+    var playBtn = $('.singleEpisode').eq(parentIndex).find($(' .mejs-playpause-button'));
+    playBtn.click();
+}
+
+//----------------------UI METHODS----------------------//
+function toggleScrollTop() {
     var scrollCap = $(window).scrollTop();
     if (scrollCap >= 200) {
         $('.js-top').removeClass('state-hide');
-
     } else {
         $('.js-top').addClass('state-hide');
     }
-
 }
 
-//------------------DOC READY------------------//
+
+//----------------------PAGE LIFECYCLE METHODS----------------------//
+$(window).scroll(function () {
+    toggleScrollTop();
+});
+
 $(document).ready(function () {
+    //Load Podcast feed
+    loadFeed("https://www.spreaker.com/show/3133182/episodes/feed", "SQfeed");
 
-    $(window).scroll(function () {
-        scrollTest();
-    });
-
-
-    // Smooth scroll
+    // Scroll to top button event
     $(".js-top").click(function (e) {
         e.preventDefault();
 
@@ -226,18 +225,12 @@ $(document).ready(function () {
         } /* speed */);
     });
 
-    //Load Podcast feed
-    loadFeed("https://www.spreaker.com/show/3133182/episodes/feed", "SQfeed");
-
-    //Load more episodes click event
-    $('.js-load-btn').on('click', function () {
-        loadMoreSQ();
-    });
-
+    //Dynamic element binding event for any play button
     $('body').on('mousedown', '.mejs-button', function () {
         turnOffSingles();
     });
 
+    //THIS IS WHATS FUCKED UP
     $(document).on('click', '.js-single-playButton', function () {
         if ($(this).closest('.singleEpisode').attr('data-state') === 'off') {
             handleOnState($(this));
@@ -248,6 +241,11 @@ $(document).ready(function () {
         turnOffFeat();
         triggerSingleAudio($(this));
     });
-    //Initialize audo element
+
+
+    // //Load more episodes click event
+    // $('.js-load-btn').on('click', function () {
+    //     loadMoreSQ();
+    // });
 
 });

@@ -55,11 +55,15 @@
     color: $inactiveGrey;
     font-family: $sqBodyFont;
     i {
+
       padding-right: $space-xs;
     }
     &:hover {
       @include transition(all 250ms ease-in-out);
       color: white;
+      i{
+        color:$sq-red;
+      }
     }
 
   }
