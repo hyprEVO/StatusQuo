@@ -10,6 +10,7 @@
   }
   @media (max-width: $screen-md) {
     flex-basis: 100%;
+    margin:10px 0;
   }
   &__flexContain {
     overflow: hidden;
@@ -56,6 +57,11 @@
     float: right;
     font-size: 15px;
     cursor: pointer;
+    i{
+      &:before{
+        content:"\f04b";
+      }
+    }
   }
   &__time {
     color: $inactiveGrey;
@@ -80,6 +86,7 @@
     text-overflow: ellipsis;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+    min-height:93px;
     @include transition(all 250ms ease-in-out);
   }
   &__bottom {
@@ -92,6 +99,7 @@
     color: $inactiveGrey;
     font-family: $sqBodyFont;
     font-size: 14px;
+    text-decoration: none;
     @media (max-width: 1220px) {
       width: 100%;
       border: none;
@@ -104,8 +112,8 @@
     &:hover {
       @include transition(all 250ms ease-in-out);
       color: white;
-      i{
-        color:$sq-red;
+      i {
+        color: $sq-red;
       }
     }
   ;
@@ -115,12 +123,18 @@
       color: white;
       @include transition(all 250ms ease-in-out);
     }
-
     .singleEpisode__wrap {
       background: #000;
       -webkit-box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
       -moz-box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
       box-shadow: inset 0px 0px 0px 1px rgba(160, 43, 49, 1);
+    }
+    .singleEpisode__playButton{
+      i{
+        &:before{
+          content:"\f04c";
+        }
+      }
     }
   }
   .mejs-button, .mejs-time {

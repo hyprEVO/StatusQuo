@@ -1,194 +1,8 @@
-<script type="text/x-handlebars-template" id="js-newsLink-template">
-    {{#each this}}
-
-    <a href="{{this.link.href}}"
-       class="main__contentBlock-newsLink main__contentBlock-newsLink-node js-contentBlock-news" title=" {{this.title}}"
-       target="_blank" data-bgImg="">
-        <div class="main__contentBlock-contentWrap">
-            <div class="main__contentBlock-heading">
-                <i class="fa fa-rss" aria-hidden="true"></i> News
-            </div>
-            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
-                {{this.title}}
-            </div>
-        </div>
-        <img src="{{extractURL this.summary.content}}" alt="">
-    </a>
-
-    {{/each}}
-</script>
-<script type="text/x-handlebars-template" id="js-MVnewsLink-template">
-    {{#each this}}
-
-    <a href="{{this.link.href}}"
-       class="main__contentBlock-newsLink main__contentBlock-newsLink-node js-contentBlock-news" title=" {{this.title}}"
-       target="_blank" data-bgImg="">
-        <div class="main__contentBlock-contentWrap">
-            <div class="main__contentBlock-heading">
-                <i class="fa fa-rss" aria-hidden="true"></i> MarzVindicator
-            </div>
-            <div class="main__contentBlock-subhead main__contentBlock-subhead--news main__contentBlock-subhead--news-feat">
-                {{this.title}}
-            </div>
-        </div>
-        <img src="{{extractURL this.summary.content}}" alt="">
-    </a>
-
-    {{/each}}
-</script>
-<script type="text/x-handlebars-template" id="js-SSnewsLink-template">
-    {{#each this}}
-
-    <a href="{{this.link.href}}"
-       class="main__contentBlock-newsLink main__contentBlock-newsLink-node js-contentBlock-news" title=" {{this.title}}"
-       target="_blank" data-bgImg="">
-        <div class="main__contentBlock-contentWrap">
-            <div class="main__contentBlock-heading">
-                <i class="fa fa-rss" aria-hidden="true"></i> Sega Sense
-            </div>
-            <div class="main__contentBlock-subhead main__contentBlock-subhead--news main__contentBlock-subhead--news-feat">
-                {{this.title}}
-            </div>
-        </div>
-        <img src="{{extractURL this.summary.content}}" alt="">
-    </a>
-
-    {{/each}}
-</script>
-<script type="text/x-handlebars-template" id="js-feat-template">
-
-    <a href="{{url}}" class="main__contentBlock-content main__contentBlock-content--feat js-feat-desk"
-       title="{{title}} #hyprEVO"
-       target="_blank" style="background-image:url({{imgPath}}); ">
-
-        <div class="main__contentBlock-heading">
-            <i class="fa fa-{{icon}}" aria-hidden="true"></i> Featured Content: {{contentType}}
-        </div>
-        <div class="main__contentBlock-subhead">
-            {{title}}
-        </div>
-        <div class="main__contentBlock-descrip">
-            {{desc}}
-        </div>
-
-    </a>
-
-</script>
-<script type="text/x-handlebars-template" id="js-feat-template-mob">
-
-    <div style="display:block"><a href="{{url}}"
-                                  class="main__contentBlock-content main__contentBlock-content--feat js-feat-mob"
-                                  title="{{title}} #hyprEVO"
-                                  target="_blank" style="background-image:url({{imgPath}}); ">
-
-        <div class="main__contentBlock-heading">
-            <i class="fa fa-{{icon}}" aria-hidden="true"></i> Featured Content: {{contentType}}
-        </div>
-        <div class="main__contentBlock-subhead">
-            {{title}}
-        </div>
-        <div class="main__contentBlock-descrip">
-            {{desc}}
-        </div>
-
-    </a></div>
-
-</script>
-<script type="text/x-handlebars-template" id="js-mvLink-template">
-    {{#each this}}
-
-    <a href="{{this.link.href}}" class="main__contentBlock-newsLink js-contentBlock-news" title=" {{this.title}}"
-       target="_blank" data-bgImg="">
-        <div class="main__contentBlock-contentWrap">
-            <div class="main__contentBlock-heading">
-                <i class="fa fa-rss" aria-hidden="true"></i>
-            </div>
-            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
-                {{this.title}}
-            </div>
-        </div>
-        <img src="{{extractURL this.summary.content}}" alt="">
-    </a>
-
-    {{/each}}
-</script>
-<script type="text/x-handlebars-template" id="js-vidListQC-template">
-    {{#each this}}
-
-    <a href="{{this.link.href}}" class="" title="[Youtube] - {{this.group.description}}"
-       target="_blank" data-bgImg="">
-        <div class="main__contentBlock-contentWrap">
-            <div class="main__contentBlock-heading">
-                <!--<i class="fa fa-rss" aria-hidden="true"></i>-->
-            </div>
-            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
-                <i class="fa  fa-youtube-play padded-leftRight-sm nopad-left hyprGreen" aria-hidden="true"></i>
-                {{this.title}}
-            </div>
-        </div>
-    </a>
-
-    {{/each}}
-</script>
-<script type="text/x-handlebars-template" id="js-vidListMV-template">
-    {{#each this}}
-
-    <a href="{{this.link.href}}" class="" title="[Youtube] - {{this.group.description}}"
-       target="_blank" data-bgImg="">
-        <div class="main__contentBlock-contentWrap">
-            <div class="main__contentBlock-heading">
-                <!---->
-            </div>
-            <div class="main__contentBlock-subhead main__contentBlock-subhead--news">
-                <i class="fa  fa-youtube-play padded-leftRight-sm nopad-left hyprGreen" aria-hidden="true"></i>
-                {{this.title}}
-            </div>
-        </div>
-    </a>
-
-    {{/each}}
-</script>
-<script type="text/x-handlebars-template" id="js-testData-template">
-
-
-    {{#each this}}
-
-    <div>
-
-        <h3>{{this.title}}</h3>
-        <audio controls>
-
-            <source src="{{this.link.1.href}}" type="audio/mpeg">
-
-        </audio>
-        <br>
-
-    </div>
-    {{/each}}
-
-</script>
-<script type="text/x-handlebars-template" id="js-oldEp-template">
-
-
-    {{#each this}}
-
-    <div>
-
-        <h3>{{this.title}}</h3>
-        <a href="">Listen now</a>
-        <br>
-
-    </div>
-    {{/each}}
-
-</script>
 <script type="text/x-handlebars-template" id="js-subTitle-template">
     {{#each this}}
     <p>{{this.subTitle}}</p>
     {{/each}}
 </script>
-
-
 <script type="text/x-handlebars-template" id="js-template-bodyText">
     {{#each this}}
     {{this.subTitle}}
@@ -199,7 +13,7 @@
 
 
     <span class="featEpisode__title">{{this.title}}</span>
-    <audio class="audio js-audio" controls="controls">
+    <audio class="audio js-audio-feature js-audio" controls="controls">
         <source type="audio/mpeg"
                 src="{{this.link.1.href}}">
     </audio>
@@ -215,29 +29,28 @@
 
     {{/each}}
 </script>
-
 <script type="text/x-handlebars-template" id="js-template-singleEpisode">
     {{#each this}}
 
 
     <div class="singleEpisode" data-state="off">
-        <audio class="js-audio audio" controls="controls">
+        <audio class="js-audio js-audio-single audio" controls="controls">
             <source type="audio/mpeg"
                     src="{{this.link.1.href}}">
         </audio>
         <div class="singleEpisode__wrap">
             <span class="singleEpisode__title">Episode #{{this.episodeNumber}} <span
                     class="singleEpisode__playButton js-single-playButton"><i
-                    class="fa fa-play"></i></span></span>
+                    class="fa "></i></span></span>
 
             <div class="singleEpisode__description">{{this.description.content}}
 
             </div>
             <div class="singleEpisode__bottom">
                 <span class="singleEpisode__time mejs-currenttime">1:12:34</span>
-                <div class="singleEpisode__download">
+                <a href="{{this.link.1.href}}" target="_blank" class="singleEpisode__download">
                     <i class="fa fa-download"></i>Download
-                </div>
+                </a>
             </div>
         </div>
     </div>

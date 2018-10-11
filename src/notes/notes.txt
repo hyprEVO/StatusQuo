@@ -13,7 +13,7 @@ de-trigger all other audio
 trigger visual state
 trigger audio state
 
-can i control click element with js
+can i control click element with jsgulp local
 
 --
 Load more buttons (elegent rendering of singleEp module??)
@@ -23,3 +23,5 @@ Sticky mini header
 rounded corners?
 background color/image??
 wp integration
+
+load more button icon change , css driven before content

@@ -101,68 +101,72 @@ function handleResponseSQfeed(response) {
     renderModule(globalData.episodeData.slice(1, 9), "#js-template-singleEpisode", ".js-render-singleEpisode", "html");
 
     //Initialize medialayer audio elements since they are dynamic...
-    renderAudio();
+    renderAudio('all');
 }
 
 //Method that initializes audio elements
-function renderAudio() {
-    $('.js-audio').mediaelementplayer({
-        features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
-    });
+function renderAudio(context) {
+    if(context === 'all'){
+        $('.js-audio').mediaelementplayer({
+            features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
+        });
+    }else{
+        $('.js-audio-single').mediaelementplayer({
+            features: ['playpause', 'progress', 'current', 'tracks', 'fullscreen']
+        });
+    }
+
 }
+
 //Load more button methods
-// function updateButtonText() {
-//     if (globalData.state === 'open') {
-//         $('.js-load-btn').html('Hide Epidsodes');
-//         return
-//     }
-//     $('.js-load-btn').html('Show More Epidsodes');
-// }
-// function loadMoreSQ() {
-//     var cleanData = globalData.episodeData;
-//     if (globalData.state === 'closed') {
-//         renderModule(cleanData.slice(7, 100), "#js-oldEp-template", ".js-testData-wrap", "append");
-//         toggleState();
-//         updateButtonText();
-//     } else {
-//         renderModule(cleanData.slice(1, 7), "#js-oldEp-template", ".js-testData-wrap", "html");
-//         toggleState();
-//         updateButtonText();
-//     }
-// }
-// function toggleState() {
-//     if (globalData.state === 'open') {
-//         globalData.state = 'closed';
-//     } else {
-//         globalData.state = 'open'
-//     }
-// }
+function updateButtonText() {
+    if (globalData.state === 'open') {
+        $('.js-loadButton-text').html('Hide Episodes');
+        return
+    }
+    $('.js-loadButton-text').html('Show More Episodes');
+}
+function loadMoreSQ() {
+    var cleanData = globalData.episodeData;
+    if (globalData.state === 'closed') {
+        renderModule(cleanData.slice(1, 100), "#js-template-singleEpisode", ".js-render-singleEpisode", "html");
+        toggleState();
+        updateButtonText();
+    } else {
+        renderModule(cleanData.slice(1, 9), "#js-template-singleEpisode", ".js-render-singleEpisode", "html");
+        toggleState();
+        updateButtonText();
+    }
+    //Initialize medialayer audio elements since they are dynamic...
+    renderAudio('single');
+}
+function toggleState() {
+    if (globalData.state === 'open') {
+        globalData.state = 'closed';
+    } else {
+        globalData.state = 'open'
+    }
+}
 
 
 //----------------------MEDIA STATE METHODS----------------------//
 
+//If the pause button exist click it on featured episode
 function turnOffFeat() {
-    var playBtn = $('.featEpisode .mejs-playpause-button');
-    if (playBtn.hasClass('mejs-pause')) {
-        playBtn.trigger('click');
-    }
+    var playBtn = $('.featEpisode .mejs-playpause-button.mejs-pause');
+    playBtn.trigger('click');
 }
+//Find any playing element by class. change the state and pause the audo
 function turnOffSingles() {
-    var allEpisodes = $('.singleEpisode');
-    allEpisodes.each(function () {
-        if ($(this).attr('data-state') === "on") {
-            $(this).find('.js-single-playButton').trigger('click');
-        }
-    });
+    $('.singleEpisode--state-playing').attr('data-state', 'off').removeClass('singleEpisode--state-playing').find($('.mejs-pause')).click();
 
 }
-
-function handleOnState(instance) {
+//Take instance as an arg
+function turnOnEpisode(instance) {
+    var allEpisodes = $('.singleEpisode');
     var thisEpisode = instance.closest('.singleEpisode');
-    var icon = instance.children('i');
-    // turnOffFeature();
-    //Reset all episodes
 
+    //Reset all episodes
     allEpisodes.removeClass('singleEpisode--state-playing');
     allEpisodes.attr('data-state', 'off');
 
@@ -170,28 +174,27 @@ function handleOnState(instance) {
     thisEpisode.addClass('singleEpisode--state-playing');
     thisEpisode.attr('data-state', 'on');
 
-    //Change button state
-    allIcons.removeClass('fa-pause').addClass('fa-play');
-    icon.removeClass('fa-play').addClass('fa-pause');
-
-
+    playAudio(instance);
 }
-function handleOffState(instance) {
+function turnOffEpisode(instance) {
     var thisEpisode = instance.closest('.singleEpisode');
-    var icon = instance.children('i');
-    //
+
     thisEpisode.removeClass('singleEpisode--state-playing');
     thisEpisode.attr('data-state', 'off');
-    //
-    allIcons.removeClass('fa-pause').addClass('fa-play');
-    icon.removeClass('fa-pause').addClass('fa-play');
-
+    pauseAudio(instance);
 }
 
-function triggerSingleAudio(instance) {
+function playAudio(instance) {
     var parentIndex = instance.closest('.singleEpisode').index();
-    var playBtn = $('.singleEpisode').eq(parentIndex).find($(' .mejs-playpause-button'));
+    var playBtn = $('.singleEpisode').eq(parentIndex).find($('.mejs-play'));
     playBtn.click();
+    turnOffFeat();
+}
+function pauseAudio(instance) {
+    var parentIndex = instance.closest('.singleEpisode').index();
+    var pauseBtn = $('.singleEpisode').eq(parentIndex).find($('.mejs-pause'));
+    pauseBtn.click();
+
 }
 
 //----------------------UI METHODS----------------------//
@@ -226,26 +229,24 @@ $(document).ready(function () {
     });
 
     //Dynamic element binding event for any play button
-    $('body').on('mousedown', '.mejs-button', function () {
+    $('body').on('mousedown', '.featEpisode .mejs-button', function () {
         turnOffSingles();
     });
 
     //THIS IS WHATS FUCKED UP
     $(document).on('click', '.js-single-playButton', function () {
         if ($(this).closest('.singleEpisode').attr('data-state') === 'off') {
-            handleOnState($(this));
+            turnOnEpisode($(this));
         } else {
-
-            handleOffState($(this));
+            turnOffEpisode($(this));
         }
-        turnOffFeat();
-        triggerSingleAudio($(this));
     });
 
 
     // //Load more episodes click event
-    // $('.js-load-btn').on('click', function () {
-    //     loadMoreSQ();
-    // });
+    $('.js-load-btn').on('click', function () {
+        loadMoreSQ();
+    });
+
 
 });
