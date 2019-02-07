@@ -1,5 +1,8 @@
 .singleEpisode {
   margin: 10px;
+  @media (min-width: 1900px) {
+    flex-basis: calc(20% - 20px);
+  }
   flex-basis: calc(25% - 20px);
 
   @media (max-width: $screen-xl) {
@@ -21,6 +24,7 @@
     padding: $space-md;
     border-top: 1px solid #191919;
     @include transition(all 250ms ease-in-out);
+    @include radius(8px);
     &:hover {
       @include transition(all 250ms ease-in-out);
       background: #000;
@@ -42,7 +46,7 @@
     font-family: $sqBodyFont;
     font-weight: 700;
     font-size: 18px;
-    padding-bottom: $space-md;
+    padding-bottom: $space-sm;
     display: block;
     text-transform: uppercase;
 
@@ -142,5 +146,8 @@
   }
   .mejs-container {
     height: 12px !important;
+  }
+  .mejs-time-slider{
+    background:#353535 !important;
   }
 }

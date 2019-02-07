@@ -34,14 +34,17 @@
 
 
     <div class="singleEpisode" data-state="off">
-        <audio class="js-audio js-audio-single audio" controls="controls">
-            <source type="audio/mpeg"
-                    src="{{this.link.1.href}}">
-        </audio>
+
         <div class="singleEpisode__wrap">
             <span class="singleEpisode__title">Episode #{{this.episodeNumber}} <span
                     class="singleEpisode__playButton js-single-playButton"><i
                     class="fa "></i></span></span>
+            <div class="padded-bottom-sm">
+                <audio class="js-audio js-audio-single audio" controls="controls">
+                    <source type="audio/mpeg"
+                            src="{{this.link.1.href}}">
+                </audio>
+            </div>
 
             <div class="singleEpisode__description">{{this.description.content}}
 
@@ -57,4 +60,41 @@
 
 
     {{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="test-eventcont">
+
+
+    <div class="category" data-bind="">
+        {{#each this}}
+        <a class="item" href="{{this.Website}}" target="_blank">
+            <img src="{{this.Image}}" alt="{{this.Name}}">
+            <p>{{this.Name}}</p>
+        </a>
+        {{/each}}
+    </div>
+
+
+</script>
+
+<script type="text/x-handlebars-template" id="test-node">
+
+
+
+        {{#each this}}
+        <div class="item">
+            <a href="{{this.URL}}">
+                <img src="{{this.Image}}">
+            </a>
+            <div class="item-content">
+
+                <h4>
+                    <a href="{{this.URL}}" alt="{{this.Name}}">{{this.Name}}</a>
+                </h4>
+            </div>
+        </div>
+        {{/each}}
+
+
+
 </script>

@@ -1,27 +1,25 @@
-pre-launch actions
-_____
+----TODO
+5 across on big displays
+Sticky mini header
+wp integration
+
+
+----pre-launch actions
 Google analytics
 twitter ograph
 fb ograph
-desc
----
-Button function lifecycle:
+meta desc
 
-de-trigger all other visual
-de-trigger all other audio
 
-trigger visual state
-trigger audio state
+----Later
+modal or single pages
 
-can i control click element with jsgulp local
 
---
-Load more buttons (elegent rendering of singleEp module??)
-single download button style update
-Full description modal
-Sticky mini header
+
+----DONE
 rounded corners?
 background color/image??
-wp integration
-
+single download button style update
+Load more buttons (elegent rendering of singleEp module??)
 load more button icon change , css driven before content
+

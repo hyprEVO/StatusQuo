@@ -1,7 +1,8 @@
 .footer {
   padding: $space-md;
-  @include clearfix();
   background: #000000;
+  @include clearfix();
+  @include radius(8px);
   &__social {
     width: 100%;
     display: block;

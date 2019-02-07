@@ -1,9 +1,13 @@
 html,
 body {
-  background-color: $accent-grey;
+  //background-color: $accent-grey;
   margin: 0;
   color: white;
-
+  background-color:$accent-grey;
+  background-image: url(../img/body-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .content {
@@ -54,14 +58,25 @@ body {
 }
 
 .padded-topBottom {
+   &-sm {
+     padding: $space-sm 0;
+   }
+   &-md {
+     padding: $space-md 0;
+   }
+   &-lg {
+     padding: $space-lg 0;
+   }
+ }
+.padded-bottom {
   &-sm {
-    padding: $space-sm 0;
+    padding-bottom: $space-sm;
   }
   &-md {
-    padding: $space-md 0;
+    padding-bottom: $space-md;
   }
   &-lg {
-    padding: $space-lg 0;
+    padding-bottom: $space-lg;
   }
 }
 
