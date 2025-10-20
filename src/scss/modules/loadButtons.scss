@@ -26,14 +26,14 @@
 
     }
   }
-  @media all and(max-width: $screen-md) {
+  @media all and (max-width: $screen-md) {
     float: none;
     width: 100%;
     text-align: center;
     display: block;
 
   }
-  @media all and(max-width: $screen-sm) {
+  @media all and (max-width: $screen-sm) {
     font-size: 13px;
     padding: $space-sm;
 

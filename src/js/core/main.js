@@ -219,53 +219,7 @@ $(window).scroll(function () {
 $(document).ready(function () {
     //Load Podcast feed
     loadFeed("https://www.spreaker.com/show/3133182/episodes/feed", "SQfeed");
-    var pdEventData = {
-        theEvents: [
-            {
-                "Name": "Advocacy",
-                "URL": "/about-the-industry/policy-priorities/Advocacy",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0007_1.jpg"
-            },
-            {
-                "Name": "Cruise Industry Regulation",
-                "URL": "/about-the-industry/policy-priorities/Cruise%20Industry%20Regulation",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0006_2.jpg"
-            },
-            {
-                "Name": "Environmental Stewardship",
-                "URL": "/about-the-industry/policy-priorities/Environmental%20Stewardship",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0005_3.jpg"
-            },
-            {
-                "Name": "Safety at Sea",
-                "URL": "/about-the-industry/policy-priorities/Safety%20at%20Sea",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0004_4.jpg"
-            },
-            {
-                "Name": "Security at Sea",
-                "URL": "/about-the-industry/policy-priorities/Security%20at%20Sea",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0003_5.jpg"
-            },
-            {
-                "Name": "Public Health and Medical",
-                "URL": "/about-the-industry/policy-priorities/Public%20Health%20and%20Medical",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0002_6.jpg"
-            },
-            {
-                "Name": "Cruise Ship Accessibility for Persons with Disabilities",
-                "URL": "/about-the-industry/policy-priorities/Cruise%20Ship%20Accessibility%20for%20Persons%20with%20Disabilities",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0001_7.jpg"
-            },
-            {
-                "Name": "CLIA Oceangoing Cruise Line Policies",
-                "URL": "/about-the-industry/policy-priorities/CLIA%20Oceangoing%20Cruise%20Line%20Policies",
-                "Image": "http://lancegd.com/CLIA-test/EP%20Logos/Maritime/Maritime-_0000_8.jpg"
-            }
-        ]
-    };
-    console.log(pdEventData.theEvents);
-
-    renderModule(pdEventData.theEvents, "#test-node", ".filter-results", "html");
+ 
 
     // Scroll to top button event
     $(".js-top").click(function (e) {

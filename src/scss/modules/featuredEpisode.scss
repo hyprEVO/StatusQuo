@@ -1,6 +1,6 @@
 .featEpisode {
   padding: $space-md $space-xl;
-  @media all and(max-width: $screen-md) {
+  @media all and (max-width: $screen-md) {
     padding: $space-md $space-md;
   }
   &__wrap {
@@ -41,7 +41,7 @@
     line-height: 2rem;
     font-size: 1.3rem;
     padding-bottom: $space-md;
-    @media all and(max-width: $screen-sm) {
+    @media all and (max-width: $screen-sm) {
       font-size: 1rem;
       line-height: 1.7rem;
     }

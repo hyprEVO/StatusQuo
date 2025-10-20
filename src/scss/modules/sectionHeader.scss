@@ -1,6 +1,6 @@
 .sectionHeader {
   padding: $space-md $space-xl $space-xs $space-xl;
-  @media all and(max-width: $screen-md) {
+  @media all and (max-width: $screen-md) {
     padding: $space-md $space-md;
   }
   font-family: $sqBodyFont;

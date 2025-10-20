@@ -1,6 +1,6 @@
 .header {
   padding: $space-lg $space-xl $space-md $space-xl;
-  @media all and(max-width: $screen-md) {
+  @media all and (max-width: $screen-md) {
     padding: $space-md $space-md;
   }
   @include clearfix();
@@ -11,7 +11,7 @@
     img {
 
     }
-    @media all and(max-width: $screen-md) {
+    @media all and (max-width: $screen-md) {
       max-width: 100%;
       width: 235px;
       float: none;
@@ -35,7 +35,7 @@
     li {
       display: inline-block;
       margin: 0 $space-sm $space-sm 0;
-      @media all and(min-width: $screen-sm) {
+      @media all and (min-width: $screen-sm) {
         margin: 0 0 0 $space-md;
       }
       a {
@@ -51,7 +51,7 @@
         }
       }
     }
-    @media all and(max-width: $screen-md) {
+    @media all and (max-width: $screen-md) {
       width: 100%;
       float: none;
       margin: 0 auto;
@@ -67,7 +67,7 @@
     &-wrap {
       float: right;
       //background: blue;
-      @media all and(max-width: $screen-md) {
+      @media all and (max-width: $screen-md) {
         float: none;
       }
     }

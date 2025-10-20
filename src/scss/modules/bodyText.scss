@@ -1,6 +1,6 @@
 .bodyText {
   padding: $space-md $space-xl;
-  @media all and(max-width: $screen-md) {
+  @media all and (max-width: $screen-md) {
     padding: $space-md $space-md;
   }
   @include clearfix();
