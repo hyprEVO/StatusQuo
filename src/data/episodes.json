@@ -1,0 +1,78 @@
+{
+  "query": {
+    "results": {
+      "feed": {
+        "subtitle": {
+          "0": "Straight Games, No Filler: Your weekly podcast for gaming trends past and present!"
+        },
+        "entry": [
+          {
+            "title": "Episode 14: Gaming Industry News",
+            "description": {
+              "content": "We break down the biggest gaming news of the week, from major studio announcements to exciting new releases and industry developments."
+            },
+            "link": {
+              "1": {
+                "href": "episodes/SQ_episode-14.m4a"
+              }
+            },
+            "published": "2024-01-15T10:00:00Z",
+            "duration": "41:20"
+          },
+          {
+            "title": "Episode 13: Indie Game Spotlight",
+            "description": {
+              "content": "This week we shine a light on amazing indie games that deserve more attention, featuring interviews with developers and gameplay highlights."
+            },
+            "link": {
+              "1": {
+                "href": "episodes/SQ_episode-13.m4a"
+              }
+            },
+            "published": "2024-01-08T10:00:00Z",
+            "duration": "38:45"
+          },
+          {
+            "title": "Episode 12: Retro Gaming Revival",
+            "description": {
+              "content": "We dive deep into the resurgence of retro gaming, from classic arcade games to modern remakes, and why these timeless titles still captivate players today."
+            },
+            "link": {
+              "1": {
+                "href": "episodes/SQ_episode-12.m4a"
+              }
+            },
+            "published": "2024-01-01T10:00:00Z",
+            "duration": "42:15"
+          },
+          {
+            "title": "Episode 11: The Future of Gaming",
+            "description": {
+              "content": "In this episode, we explore the latest trends in gaming technology, from VR to cloud gaming, and discuss what the future holds for gamers worldwide."
+            },
+            "link": {
+              "1": {
+                "href": "episodes/SQ_episode-11.m4a"
+              }
+            },
+            "published": "2023-12-25T10:00:00Z",
+            "duration": "45:30"
+          },
+          {
+            "title": "Episode 10: Welcome to Status Quo",
+            "description": {
+              "content": "Welcome to Status Quo! In this episode, we introduce ourselves and discuss what listeners can expect from this weekly gaming podcast."
+            },
+            "link": {
+              "1": {
+                "href": "episodes/SQ_episode-10.m4a"
+              }
+            },
+            "published": "2023-12-18T10:00:00Z",
+            "duration": "35:10"
+          }
+        ]
+      }
+    }
+  }
+}

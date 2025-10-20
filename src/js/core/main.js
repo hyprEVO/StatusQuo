@@ -56,6 +56,17 @@ function loadFeed(url, key) {
     injectScript(concatFeedUrl);
 }
 
+//Load local JSON data instead of YQL API
+function loadLocalData() {
+    $.getJSON('data/episodes.json')
+        .done(function(response) {
+            handleResponseSQfeed(response);
+        })
+        .fail(function() {
+            console.error('Failed to load local episode data');
+        });
+}
+
 //Callback function from loadFeed() that takes in the succesful response data as an arg
 function handleResponseSQfeed(response) {
 
@@ -169,6 +180,10 @@ function turnOnEpisode(instance) {
     var allEpisodes = $('.singleEpisode');
     var thisEpisode = instance.closest('.singleEpisode');
 
+    //Debug: Log the audio source
+    var audioSource = thisEpisode.find('audio source').attr('src');
+    console.log('Audio source path:', audioSource);
+
     //Reset all episodes
     allEpisodes.removeClass('singleEpisode--state-playing');
     allEpisodes.attr('data-state', 'off');
@@ -217,8 +232,8 @@ $(window).scroll(function () {
 });
 
 $(document).ready(function () {
-    //Load Podcast feed
-    loadFeed("https://www.spreaker.com/show/3133182/episodes/feed", "SQfeed");
+    //Load local podcast data
+    loadLocalData();
  
 
     // Scroll to top button event

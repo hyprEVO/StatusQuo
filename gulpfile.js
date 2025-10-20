@@ -52,7 +52,7 @@ gulp.task('sync', function () {
 
 //Reload Browser
 gulp.task('reload', function () {
-    return gulp.src('')
+    return gulp.src('./build/**/*')
         .pipe(wait(2000))
         .pipe(browserSync.stream());
 });
@@ -103,6 +103,19 @@ gulp.task('make-rest', function () {
         }));
 });
 
+//Copy data directory to build
+gulp.task('make-data', function () {
+    return gulp.src(srcDir + 'data/**/*')
+        .pipe(gulp.dest(buildDir + 'data/'))
+        .pipe(gulp.dest(altDir + 'data/'));
+});
+
+//Copy episodes directory to build
+gulp.task('make-episodes', function () {
+    return gulp.src(srcDir + 'episodes/**/*')
+        .pipe(gulp.dest(buildDir + 'episodes/'));
+});
+
 gulp.task('make-html', function () {
     console.log('Starting make-html task...');
     return gulp.src([srcDir + 'index.html'])
@@ -124,7 +137,7 @@ gulp.task('make-html', function () {
         .pipe(gulp.dest(buildDir));
 });
 //(styles, js,, sync rest)
-gulp.task('construct', gulp.series('clean', 'make-styles', 'make-html', 'make-js'));
+gulp.task('construct', gulp.series('clean', 'make-styles', 'make-html', 'make-js', 'make-data', 'make-episodes'));
 
 //(styles, js, image, sync rest)
 gulp.task('construct-all', gulp.series('clean', 'make-styles', 'make-html', 'make-js', 'make-image', 'make-rest'));
