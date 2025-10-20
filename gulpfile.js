@@ -93,7 +93,7 @@ gulp.task('make-image', function () {
 
 //Build everything make-rest --> build
 gulp.task('make-rest', function () {
-    var ignoreList = ['html', 'modules', 'img', 'scss', 'css', 'js', 'js/**', 'partials', 'notes'];
+    var ignoreList = ['**/*.html', 'modules', 'img', 'scss', 'css', 'js', 'js/**', 'partials', 'notes'];
     return gulp.src(srcDir + '**/*')
         .pipe(dirSync(srcDir, buildDir, {
             ignore: ignoreList
@@ -104,22 +104,30 @@ gulp.task('make-rest', function () {
 });
 
 gulp.task('make-html', function () {
+    console.log('Starting make-html task...');
     return gulp.src([srcDir + 'index.html'])
+        .on('data', function(file) {
+            console.log('Processing file:', file.path);
+        })
         .pipe(fileinclude({
             prefix: '@@',
-            basepath: srcDir,
-            context: {
-                variable: 'value'
-            }
+            basepath: '@file',
+            context: {}
         }))
+        .on('error', function(err) {
+            console.log('File include error:', err);
+        })
+        .on('data', function(file) {
+            console.log('After fileinclude, file content length:', file.contents.length);
+        })
         .pipe(gulp.dest(altDir))
         .pipe(gulp.dest(buildDir));
 });
 //(styles, js,, sync rest)
-gulp.task('construct', gulp.series('clean', 'make-styles', 'make-js', 'make-html', 'make-rest'));
+gulp.task('construct', gulp.series('clean', 'make-styles', 'make-html', 'make-js'));
 
 //(styles, js, image, sync rest)
-gulp.task('construct-all', gulp.series('clean', 'make-styles', 'make-js', 'make-html', 'make-image', 'make-rest'));
+gulp.task('construct-all', gulp.series('clean', 'make-styles', 'make-html', 'make-js', 'make-image', 'make-rest'));
 
 
 //-- WATCHERS --//
@@ -127,11 +135,11 @@ gulp.task('construct-all', gulp.series('clean', 'make-styles', 'make-js', 'make-
 
 gulp.task('watch', function () {
     //Source
-    gulp.watch(['./src/*.html', './src/modules/*.html', './src/modules/stasis/*.html', './src/modules/handlebars/*.html', './src/*.html'], gulp.series('make-html', 'make-rest', 'reload'));
-    gulp.watch(['./src/*.php'], gulp.series('make-html', 'make-rest', 'reload'));
-    gulp.watch(['./src/scss/*.scss', './src/scss/*/*.scss'], gulp.series('make-html', 'make-styles', 'reload'));
-    gulp.watch(['./src/js/**/*.js'], gulp.series('make-html', 'make-js','make-rest', 'reload'));
-    gulp.watch(['./src/img/**'], gulp.series('make-rest', 'reload'));
+    gulp.watch(['./src/*.html', './src/modules/*.html', './src/modules/stasis/*.html', './src/modules/handlebars/*.html', './src/*.html'], gulp.series('construct', 'reload'));
+    gulp.watch(['./src/*.php'], gulp.series('construct', 'reload'));
+    gulp.watch(['./src/scss/*.scss', './src/scss/*/*.scss'], gulp.series('construct', 'reload'));
+    gulp.watch(['./src/js/**/*.js'], gulp.series('construct', 'reload'));
+    gulp.watch(['./src/img/**'], gulp.series('construct', 'reload'));
 });
 
 
